@@ -1,1 +1,83 @@
+@media (max-width: 1160px) {
+      :root {
+        --left-w: 246px;
+        --right-w: 220px;
+      }
 
+      .topbar {
+        padding: 0 28px;
+      }
+
+      .work-grid,
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      :root {
+        --top-h: auto;
+      }
+
+      .app {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .topbar {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .mode-toggle {
+        justify-self: start;
+      }
+
+      .shell {
+        display: block;
+        height: auto;
+      }
+
+      .left-rail,
+      .right-rail {
+        position: relative;
+        top: auto;
+        height: auto;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .shell.right-collapsed .right-rail {
+        padding: 12px 18px;
+      }
+
+      .shell.right-collapsed .right-block {
+        display: block;
+      }
+
+      .shell.right-collapsed .collapsed-tools {
+        display: none;
+      }
+
+      .workspace {
+        height: auto;
+        overflow: visible;
+        padding: 22px 18px 44px;
+      }
+
+      .field-grid,
+      .file-list {
+        grid-template-columns: 1fr;
+      }
+
+      .file-preview img,
+      .doc-thumb {
+        height: 78px;
+      }
+
+      .message {
+        max-width: 100%;
+      }
+    }
