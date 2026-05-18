@@ -6,6 +6,124 @@
       align-items: stretch;
     }
 
+    .product-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.38fr) minmax(240px, 0.62fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 22px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .hero-copy {
+      min-width: 0;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .product-hero h2 {
+      margin: 14px 0 10px;
+      font-size: 29px;
+      line-height: 1.18;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .product-hero h2 span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .product-hero p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .hero-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: hero-step;
+    }
+
+    .hero-flow li {
+      min-width: 0;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--text);
+      background: var(--soft);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .hero-flow li::before {
+      counter-increment: hero-step;
+      content: counter(hero-step);
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      color: var(--inverse-text);
+      background: var(--dark-control);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .demo-note {
+      display: grid;
+      align-content: center;
+      gap: 9px;
+      min-width: 0;
+      padding: 16px;
+      border: 1px dashed var(--line-strong);
+      border-radius: 8px;
+      background: var(--control-bg);
+    }
+
+    .demo-note strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 900;
+    }
+
+    .demo-note p {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
     .panel,
     .report-card,
     .chat-card,
