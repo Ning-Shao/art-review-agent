@@ -14,5 +14,9 @@ export function readJSON(key, fallback) {
 }
 
 export function writeJSON(key, value) {
-  window.localStorage.setItem(keyFor(key), JSON.stringify(value));
+  try {
+    window.localStorage.setItem(keyFor(key), JSON.stringify(value));
+  } catch {
+    // Static demo storage is best-effort; interaction should keep working if storage is unavailable.
+  }
 }

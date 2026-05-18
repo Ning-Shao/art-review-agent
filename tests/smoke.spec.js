@@ -14,6 +14,8 @@ const requiredFiles = [
   'src/styles/index.css',
   'docs/product/product-brief.md',
   'tests/smoke.spec.js',
+  'vite.config.js',
+  'public/favicon.svg',
 ];
 
 for (const file of requiredFiles) {
@@ -25,6 +27,10 @@ for (const file of requiredFiles) {
 const indexHtml = readFileSync('index.html', 'utf8');
 if (!indexHtml.includes('<div id="app"></div>')) {
   throw new Error('index.html must expose the app mount point.');
+}
+
+if (!indexHtml.includes('rel="icon" href="./favicon.svg"')) {
+  throw new Error('index.html should reference the static favicon with a relative path.');
 }
 
 if (indexHtml.includes('<style>') || !indexHtml.includes('type="module" src="./src/main.js"')) {
@@ -47,6 +53,18 @@ const stylesIndex = readFileSync('src/styles/index.css', 'utf8');
 for (const stylesheet of ['tokens.css', 'base.css', 'layout.css', 'components.css', 'responsive.css']) {
   if (!stylesIndex.includes(stylesheet)) {
     throw new Error(`styles/index.css must import ${stylesheet}`);
+  }
+}
+
+const viteConfig = readFileSync('vite.config.js', 'utf8');
+if (!viteConfig.includes("base: './'")) {
+  throw new Error('vite.config.js should use a relative base for static subpath deployment.');
+}
+
+if (existsSync('dist/index.html')) {
+  const builtIndex = readFileSync('dist/index.html', 'utf8');
+  if (builtIndex.includes('src="/assets/') || builtIndex.includes('href="/assets/')) {
+    throw new Error('dist/index.html should not use root-relative /assets paths.');
   }
 }
 

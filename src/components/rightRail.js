@@ -1,5 +1,5 @@
 import { ACTIONS, DOM_IDS } from '../ids.js';
-import { activateHistoryItem, deleteHistoryItem, renameHistoryItem } from '../state/history.js';
+import { activateHistoryItem, deleteHistoryItem, persistHistory, renameHistoryItem } from '../state/history.js';
 import { renderHistoryPanel } from './historyPanel.js';
 import { renderReportOutline } from './reportOutline.js';
 
@@ -43,7 +43,7 @@ export function renderPersistedHistoryRecords(records) {
   records.slice().reverse().forEach(addHistoryRecordToPanel);
 }
 
-export function bindRightRail() {
+export function bindRightRail(store) {
   const shell = document.getElementById(DOM_IDS.shell);
   const workspace = document.querySelector('.workspace');
   const collapseRight = document.getElementById(DOM_IDS.collapseRight);
@@ -97,9 +97,22 @@ export function bindRightRail() {
       const title = activeHistoryCard.querySelector('.history-info strong');
       const nextName = prompt('重命名历史记录', title.textContent.trim());
       renameHistoryItem(activeHistoryCard, nextName);
+      if (store && nextName && nextName.trim()) {
+        const record = store.history.find((item) => item.id === activeHistoryCard.dataset.historyId);
+        if (record) {
+          record.title = nextName.trim();
+          persistHistory(store.history);
+        }
+      }
     }
     if (actionButton.dataset.action === ACTIONS.viewHistory) activateHistoryItem(activeHistoryCard);
-    if (actionButton.dataset.action === ACTIONS.deleteHistory) deleteHistoryItem(activeHistoryCard);
+    if (actionButton.dataset.action === ACTIONS.deleteHistory) {
+      if (store) {
+        store.history = store.history.filter((item) => item.id !== activeHistoryCard.dataset.historyId);
+        persistHistory(store.history);
+      }
+      deleteHistoryItem(activeHistoryCard);
+    }
     closeHistoryMenu();
   });
   document.addEventListener('click', (event) => {
