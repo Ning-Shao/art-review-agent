@@ -1,9 +1,9 @@
 import { DOM_IDS } from '../ids.js';
+import { mockReportTemplate } from '../data/mockReport.js';
 import { downloadTextFile } from '../utils/file.js';
 
 export function renderReportPanel() {
-
-  return "<section class=\"report-section\" aria-label=\"正式预评审报告\">\n          <div class=\"section-head\">\n            <div>\n              <h2>正式预评审报告</h2>\n              <p>面向老师、学生和参赛提交场景整理成可阅读、分享和下载的文本报告。</p>\n            </div>\n            <div class=\"score\" aria-label=\"综合分 78\"><span>78</span></div>\n          </div>\n\n          <div class=\"report-actions\" aria-label=\"报告操作\">\n            <div class=\"report-action-group\">\n              <button class=\"report-action\" id=\"shareReport\" type=\"button\" aria-expanded=\"false\" aria-controls=\"sharePanel\">分享</button>\n              <div class=\"share-panel\" id=\"sharePanel\" hidden>\n                <label for=\"shareLink\">可复制链接</label>\n                <div class=\"share-row\">\n                  <input id=\"shareLink\" readonly value=\"\">\n                  <button id=\"copyShareLink\" type=\"button\">复制</button>\n                </div>\n              </div>\n            </div>\n            <div class=\"report-action-group\">\n              <button class=\"report-action\" id=\"downloadReport\" type=\"button\" aria-expanded=\"false\" aria-controls=\"downloadMenu\">下载</button>\n              <div class=\"action-menu\" id=\"downloadMenu\" hidden>\n                <button id=\"downloadPdf\" type=\"button\">下载 PDF</button>\n                <button id=\"downloadMarkdown\" type=\"button\">下载 Markdown</button>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"formal-report\" id=\"formalReport\">\n            <h3>城市更新海报方案｜AI 预评审文本报告</h3>\n            <section id=\"basic-info\">\n              <h4>作品基本信息</h4>\n              <div class=\"info-table\">\n                <div><strong>作品名称</strong>城市更新海报方案</div>\n                <div><strong>评测类型</strong>赛前预评审</div>\n                <div><strong>竞赛节点</strong>米兰设计周 / 视觉传达类</div>\n                <div><strong>媒体节点</strong>海报 / 品牌设计 / 视觉传达</div>\n              </div>\n            </section>\n            <section id=\"overall-review\">\n              <h4>整体评价</h4>\n              <p>作品围绕城市更新与公共空间再生展开，画面使用较克制的黑白灰图形秩序表达社区记忆、空间更新与公众参与之间的关系。整体方向与视觉传达类竞赛命题具备较高相关性，但目前还需要把概念表达进一步转化为明确的调研证据、视觉策略和落地场景。</p>\n            </section>\n            <section id=\"dimension-analysis\">\n              <h4>评分维度分析</h4>\n              <ul>\n                <li>主题理解：能够抓住城市更新的公共性和社会议题，但问题定义还可以更具体。</li>\n                <li>视觉表达：构图清晰，图形语言具备识别度，但材料之间的叙事连续性仍需加强。</li>\n                <li>过程呈现：当前过程材料偏少，建议补充调研、草图、信息架构和方案迭代证据。</li>\n                <li>竞赛适配：与米兰设计周视觉传达类方向基本匹配，需要强化国际化表达和社会价值阐释。</li>\n              </ul>\n            </section>\n            <section id=\"strengths\">\n              <h4>当前优势</h4>\n              <p>作品主题具有现实议题基础，视觉风格统一，主画面具备快速识别能力。相较于普通形式练习，该方案已经具备“问题意识”和“竞赛叙事”的雏形，适合继续向正式参赛材料推进。</p>\n            </section>\n            <section id=\"problems\">\n              <h4>主要问题</h4>\n              <p>当前最大风险是作品说明偏概念化，评委难以从现有材料中看到调研依据、目标人群、传播场景和视觉选择之间的因果关系。如果只保留抽象表达，作品容易被判断为形式完整但论证不足。</p>\n            </section>\n            <section id=\"revision-suggestions\">\n              <h4>修改建议</h4>\n              <ul>\n                <li>将作品说明调整为“问题背景、设计策略、视觉执行、预期影响”的顺序。</li>\n                <li>补充 3 到 5 张过程图，说明从城市观察到视觉方案的形成路径。</li>\n                <li>为每张上传材料标注对应评审维度，减少评委理解成本。</li>\n                <li>增加应用场景图，例如街区公告、公共展板、社交媒体传播或活动导视。</li>\n              </ul>\n            </section>\n            <section id=\"competition-fit\">\n              <h4>参赛方向匹配度</h4>\n              <p>建议优先匹配“米兰设计周 / 视觉传达类”，备选方向为“全国大学生设计创新实践大赛 / A 类赛道”。如果后续补充空间改造或公共装置方案，也可以扩展到环境空间类节点。</p>\n            </section>\n            <section id=\"summary\">\n              <h4>总结</h4>\n              <p>该作品已经具备参赛前评审的基本潜力。下一步应从“好看的海报”推进到“有证据、有场景、有公共价值的设计方案”，让视觉表达、研究过程和竞赛标准形成更稳定的对应关系。</p>\n            </section>\n          </div>\n        </section>";
+  return "<section class=\"report-section\" aria-label=\"正式预评审报告\">\n          <div class=\"section-head\">\n            <div>\n              <h2>正式预评审报告</h2>\n              <p>面向老师、学生和参赛提交场景整理成可阅读、分享和下载的文本报告。</p>\n            </div>\n            <div class=\"score\" aria-label=\"综合分 " + mockReportTemplate.score + "\"><span>" + mockReportTemplate.score + "</span></div>\n          </div>\n\n          <div class=\"report-actions\" aria-label=\"报告操作\">\n            <div class=\"report-action-group\">\n              <button class=\"report-action\" id=\"shareReport\" type=\"button\" aria-expanded=\"false\" aria-controls=\"sharePanel\">分享</button>\n              <div class=\"share-panel\" id=\"sharePanel\" hidden>\n                <label for=\"shareLink\">可复制链接</label>\n                <div class=\"share-row\">\n                  <input id=\"shareLink\" readonly value=\"\">\n                  <button id=\"copyShareLink\" type=\"button\">复制</button>\n                </div>\n              </div>\n            </div>\n            <div class=\"report-action-group\">\n              <button class=\"report-action\" id=\"downloadReport\" type=\"button\" aria-expanded=\"false\" aria-controls=\"downloadMenu\">下载</button>\n              <div class=\"action-menu\" id=\"downloadMenu\" hidden>\n                <button id=\"downloadPdf\" type=\"button\">下载 PDF</button>\n                <button id=\"downloadMarkdown\" type=\"button\">下载 Markdown</button>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"formal-report\" id=\"formalReport\">" + renderFormalReport(mockReportTemplate) + "</div>\n        </section>";
 
 }
 
@@ -39,8 +39,74 @@ function escapeHTML(value) {
   })[char]);
 }
 
-function renderList(items) {
+function renderTextList(items) {
   return '<ul>' + items.map((item) => '<li>' + escapeHTML(item) + '</li>').join('') + '</ul>';
+}
+
+function renderInfoGrid(items) {
+  return '<div class="info-table">' + items.map((item) => (
+    '<div><strong>' + escapeHTML(item.label) + '</strong>' + escapeHTML(item.value) + '</div>'
+  )).join('') + '</div>';
+}
+
+function renderDimensionScores(dimensions) {
+  return '<div class="dimension-score-list">' + dimensions.map((dimension) => {
+    if (typeof dimension === 'string') {
+      return '<div class="dimension-score"><strong>' + escapeHTML(dimension) + '</strong></div>';
+    }
+    return '<div class="dimension-score">' +
+      '<div class="dimension-score-head">' +
+        '<strong>' + escapeHTML(dimension.label) + '</strong>' +
+        '<span>' + escapeHTML(dimension.score) + '</span>' +
+      '</div>' +
+      '<p>' + escapeHTML(dimension.comment) + '</p>' +
+    '</div>';
+  }).join('') + '</div>';
+}
+
+function getFeedbackList(report, key, fallback) {
+  if (report.feedback && Array.isArray(report.feedback[key])) return report.feedback[key];
+  const value = report[key] || fallback || '';
+  return Array.isArray(value) ? value : [value].filter(Boolean);
+}
+
+function renderFormalReport(report) {
+  const overview = report.overview || {};
+  const work = report.work || {};
+  return '<h3>' + escapeHTML(report.title) + '</h3>' +
+    '<section id="work-overview">' +
+      '<h4>作品概览</h4>' +
+      renderInfoGrid([
+        { label: '作品类型', value: overview.workType || work.mediaNode || '艺术设计类综合作品' },
+        { label: '主题方向', value: overview.themeDirection || work.track || '开放命题' },
+        { label: '适合竞赛类别', value: overview.competitionCategory || work.breadcrumb || '艺术设计创新实践类竞赛' },
+        { label: '当前完成度判断', value: overview.completion || '中等完成度：建议补充过程材料后再提交。' },
+      ]) +
+    '</section>' +
+    '<section id="basic-info">' +
+      '<h4>作品基本信息</h4>' +
+      renderInfoGrid([
+        { label: '作品名称', value: work.title || '未命名作品' },
+        { label: '评测类型', value: work.mode || '赛前预评审' },
+        { label: '竞赛节点', value: work.breadcrumb || '未选择' },
+        { label: '媒体节点', value: work.mediaNode || '未选择' },
+      ]) +
+    '</section>' +
+    '<section id="total-score">' +
+      '<h4>总评分</h4>' +
+      '<div class="score-summary">' +
+        '<strong>' + escapeHTML(report.score) + '<span>/100</span></strong>' +
+        '<div><b>' + escapeHTML(report.grade || '可进入初审') + '</b><p>' + escapeHTML(report.gradeAdvice || '') + '</p></div>' +
+      '</div>' +
+    '</section>' +
+    '<section id="overall-review"><h4>整体评价</h4><p>' + escapeHTML(report.overall) + '</p></section>' +
+    '<section id="dimension-analysis"><h4>维度评分</h4>' + renderDimensionScores(report.dimensions || []) + '</section>' +
+    '<section id="strengths"><h4>主要优点</h4>' + renderTextList(getFeedbackList(report, 'strengths')) + '</section>' +
+    '<section id="problems"><h4>主要问题</h4>' + renderTextList(getFeedbackList(report, 'problems')) + '</section>' +
+    '<section id="revision-suggestions"><h4>修改建议</h4>' + renderTextList(getFeedbackList(report, 'suggestions', report.suggestions)) + '</section>' +
+    '<section id="submission-checklist"><h4>提交前检查清单</h4>' + renderTextList(getFeedbackList(report, 'checklist')) + '</section>' +
+    '<section id="competition-fit"><h4>参赛方向匹配度</h4><p>' + escapeHTML(report.competitionFit) + '</p></section>' +
+    '<section id="summary"><h4>总结</h4><p>' + escapeHTML(report.summary) + '</p></section>';
 }
 
 export function updateReportPanel(report) {
@@ -50,29 +116,12 @@ export function updateReportPanel(report) {
   if (!formalReport) return;
 
   if (score) {
-    score.setAttribute('aria-label', '综合分 ' + report.score);
+    score.setAttribute('aria-label', '综合分 ' + report.score + '，' + (report.grade || ''));
     score.style.background = 'conic-gradient(var(--accent) 0 ' + report.score + '%, #e6e6e6 ' + report.score + '% 100%)';
   }
   if (scoreText) scoreText.textContent = String(report.score);
 
-  formalReport.innerHTML =
-    '<h3>' + escapeHTML(report.title) + '</h3>' +
-    '<section id="basic-info">' +
-      '<h4>作品基本信息</h4>' +
-      '<div class="info-table">' +
-        '<div><strong>作品名称</strong>' + escapeHTML(report.work.title) + '</div>' +
-        '<div><strong>评测类型</strong>' + escapeHTML(report.work.mode) + '</div>' +
-        '<div><strong>竞赛节点</strong>' + escapeHTML(report.work.breadcrumb) + '</div>' +
-        '<div><strong>媒体节点</strong>' + escapeHTML(report.work.mediaNode) + '</div>' +
-      '</div>' +
-    '</section>' +
-    '<section id="overall-review"><h4>整体评价</h4><p>' + escapeHTML(report.overall) + '</p></section>' +
-    '<section id="dimension-analysis"><h4>评分维度分析</h4>' + renderList(report.dimensions) + '</section>' +
-    '<section id="strengths"><h4>当前优势</h4><p>' + escapeHTML(report.strengths) + '</p></section>' +
-    '<section id="problems"><h4>主要问题</h4><p>' + escapeHTML(report.problems) + '</p></section>' +
-    '<section id="revision-suggestions"><h4>修改建议</h4>' + renderList(report.suggestions) + '</section>' +
-    '<section id="competition-fit"><h4>参赛方向匹配度</h4><p>' + escapeHTML(report.competitionFit) + '</p></section>' +
-    '<section id="summary"><h4>总结</h4><p>' + escapeHTML(report.summary) + '</p></section>';
+  formalReport.innerHTML = renderFormalReport(report);
 }
 
 export function bindReportPanel() {

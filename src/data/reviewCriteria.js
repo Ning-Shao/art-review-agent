@@ -1,1 +1,1 @@
-export const reviewCriteria = ['主题理解', '视觉表达', '过程呈现', '竞赛适配'];
+export const reviewCriteria = ['主题契合度', '视觉表现', '创新性', '叙事完整度', '竞赛适配度'];
