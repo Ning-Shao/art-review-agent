@@ -61,6 +61,15 @@
       mix-blend-mode: multiply;
     }
 
+    .text-logo {
+      height: auto;
+      color: var(--text);
+      font-size: 22px;
+      line-height: 1.2;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
     .sr-only {
       position: absolute;
       width: 1px;

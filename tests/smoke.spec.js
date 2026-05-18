@@ -11,6 +11,8 @@ const requiredFiles = [
   'src/state/reviewStore.js',
   'src/services/aiReviewService.mock.js',
   'src/services/storageService.js',
+  'src/data/mockCases.js',
+  'src/data/reviewRubrics.js',
   'src/styles/index.css',
   'docs/product/product-brief.md',
   'tests/smoke.spec.js',
@@ -59,6 +61,26 @@ for (const stylesheet of ['tokens.css', 'base.css', 'layout.css', 'components.cs
 const viteConfig = readFileSync('vite.config.js', 'utf8');
 if (!viteConfig.includes("base: './'")) {
   throw new Error('vite.config.js should use a relative base for static subpath deployment.');
+}
+
+const mockCases = readFileSync('src/data/mockCases.js', 'utf8');
+for (const caseTitle of ['城市更新主题海报', '非遗文创包装设计', '校园公共空间改造', 'AI 辅助视觉叙事作品', '品牌视觉识别系统']) {
+  if (!mockCases.includes(caseTitle)) {
+    throw new Error(`mockCases.js must include seed case: ${caseTitle}`);
+  }
+}
+
+for (const field of ['title', 'category', 'theme', 'competitionFit', 'strengths', 'weaknesses', 'suggestions', 'scoreProfile']) {
+  if (!mockCases.includes(field)) {
+    throw new Error(`mockCases.js must include case field: ${field}`);
+  }
+}
+
+const reviewRubrics = readFileSync('src/data/reviewRubrics.js', 'utf8');
+for (const rubric of ['主题契合度', '视觉表现', '创新性', '叙事完整度', '竞赛适配度']) {
+  if (!reviewRubrics.includes(rubric)) {
+    throw new Error(`reviewRubrics.js must include rubric: ${rubric}`);
+  }
 }
 
 if (existsSync('dist/index.html')) {

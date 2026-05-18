@@ -1,1 +1,3 @@
-export const reviewCriteria = ['主题契合度', '视觉表现', '创新性', '叙事完整度', '竞赛适配度'];
+import { reviewRubrics } from './reviewRubrics.js';
+
+export const reviewCriteria = reviewRubrics.map((rubric) => rubric.label);

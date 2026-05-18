@@ -1,10 +1,9 @@
 import { ACTIONS, DOM_IDS } from '../ids.js';
 import { activateHistoryItem, deleteHistoryItem, persistHistory, renameHistoryItem } from '../state/history.js';
 import { renderHistoryPanel } from './historyPanel.js';
-import { renderReportOutline } from './reportOutline.js';
 
 export function renderRightRail() {
-  return "<aside class=\"right-rail\" aria-label=\"历史记录和当前报告\">\n        <div class=\"collapsed-tools\" aria-label=\"折叠后的历史记录栏\">\n          <span class=\"collapse-round\" aria-hidden=\"true\">\n            <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n              <path d=\"M3 12a9 9 0 1 0 3-6.7\"></path>\n              <path d=\"M3 4v5h5\"></path>\n              <path d=\"M12 7v6l4 2\"></path>\n            </svg>\n          </span>\n          <button class=\"collapse-card\" id=\"expandRight\" type=\"button\" aria-label=\"展开历史记录\">‹</button>\n        </div>\n" + renderHistoryPanel() + '\n' + renderReportOutline() + "\n      </aside>";
+  return "<aside class=\"right-rail\" aria-label=\"历史记录\">\n        <div class=\"collapsed-tools\" aria-label=\"折叠后的历史记录栏\">\n          <span class=\"collapse-round\" aria-hidden=\"true\">\n            <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n              <path d=\"M3 12a9 9 0 1 0 3-6.7\"></path>\n              <path d=\"M3 4v5h5\"></path>\n              <path d=\"M12 7v6l4 2\"></path>\n            </svg>\n          </span>\n          <button class=\"collapse-card\" id=\"expandRight\" type=\"button\" aria-label=\"展开历史记录\">‹</button>\n        </div>\n" + renderHistoryPanel() + "\n      </aside>";
 }
 
 export function renderHistoryMenu() {

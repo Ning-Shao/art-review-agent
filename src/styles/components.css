@@ -163,6 +163,7 @@
     }
 
     .field input,
+    .field select,
     .field textarea {
       width: 100%;
       border: 1px solid var(--line);
@@ -173,7 +174,8 @@
       font-size: 13px;
     }
 
-    .field input {
+    .field input,
+    .field select {
       height: 36px;
       padding: 0 10px;
     }
@@ -1210,6 +1212,7 @@
     .chat-card,
     .history-card,
     .field input,
+    .field select,
     .field textarea,
     .upload-drop,
     .prompt-row,
@@ -1242,6 +1245,7 @@
     body[data-theme="night"] .chat-card,
     body[data-theme="night"] .history-card,
     body[data-theme="night"] .field input,
+    body[data-theme="night"] .field select,
     body[data-theme="night"] .field textarea,
     body[data-theme="night"] .upload-drop,
     body[data-theme="night"] .prompt-row,

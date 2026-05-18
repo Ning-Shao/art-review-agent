@@ -7,6 +7,7 @@ export function createReviewStore() {
     theme: getInitialTheme(),
     uploads: createUploadState(),
     history: readPersistedHistory(),
-    selectedBreadcrumb: '视觉传达 / 海报设计 / 米兰设计周 / 城市更新主题赛道',
+    selectedProjectType: 'competition',
+    selectedBreadcrumb: '竞赛项目 / 第四届‘设计赋能土特产，助力乡村振兴’公益赛道',
   };
 }

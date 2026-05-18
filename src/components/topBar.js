@@ -3,7 +3,7 @@ import { getNextTheme, persistTheme } from '../state/theme.js';
 
 export function renderTopBar() {
 
-  return "<header class=\"topbar\">\n\t      <div class=\"brand\">\n\t        <div class=\"brand-mark\" aria-hidden=\"true\">AI</div>\n\t        <h1 class=\"brand-title\" aria-label=\"AI艺术评审台\">\n\t          <span class=\"sr-only\">AI艺术评审台</span>\n\t          <img src=\"assets/brand-wordmark-ink.png\" alt=\"\" aria-hidden=\"true\">\n\t        </h1>\n\t      </div>\n      <label class=\"search\">\n        <span aria-hidden=\"true\">⌕</span>\n        <input type=\"search\" placeholder=\"Search ...\">\n        <span class=\"kbd\">⌘K</span>\n      </label>\n      <button class=\"mode-toggle\" id=\"themeToggle\" type=\"button\" aria-label=\"切换夜间模式\">\n        <span aria-hidden=\"true\">◐</span>\n        <span id=\"themeToggleText\">夜间模式</span>\n      </button>\n    </header>";
+  return "<header class=\"topbar\">\n\t      <div class=\"brand\">\n\t        <h1 class=\"brand-title text-logo\" aria-label=\"智能预评审\">智能预评审</h1>\n\t      </div>\n      <label class=\"search\">\n        <span aria-hidden=\"true\">⌕</span>\n        <input type=\"search\" placeholder=\"Search ...\">\n        <span class=\"kbd\">⌘K</span>\n      </label>\n      <button class=\"mode-toggle\" id=\"themeToggle\" type=\"button\" aria-label=\"切换夜间模式\">\n        <span aria-hidden=\"true\">◐</span>\n        <span id=\"themeToggleText\">夜间模式</span>\n      </button>\n    </header>";
 
 }
 
