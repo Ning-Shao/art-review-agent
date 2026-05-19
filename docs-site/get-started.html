@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>5 分钟快速上手｜智能预评审</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./index.html"><span class="brand-title">智能预评审</span><span class="brand-subtitle">产品说明与使用指南</span></a>
+      <nav>
+        <div class="nav-section"><p class="nav-label">开始</p><a class="nav-link" href="./index.html">文档首页</a><a class="nav-link active" href="./get-started.html">5 分钟快速上手</a><a class="nav-link" href="./product-intro.html">产品简介</a></div>
+        <div class="nav-section"><p class="nav-label">功能</p><a class="nav-link" href="./features.html">功能模块</a><a class="nav-link" href="./ai-review-report.html">智能预评审报告</a></div>
+      </nav>
+    </aside>
+    <main class="page">
+      <article class="content">
+        <span class="eyebrow">Get Started</span>
+        <h1>5 分钟快速上手</h1>
+        <p class="lead">本页说明如何运行当前静态 Demo，并完成一次从选择项目语境到生成 Mock 预评审报告的演示流程。</p>
+
+        <section id="run">
+          <h2>1. 打开工作台</h2>
+          <p>项目使用 Vite，建议通过本地服务器访问，不建议直接使用 <code>file://</code> 打开。</p>
+          <pre><code>npm install
+npm run dev</code></pre>
+          <p>默认地址为：</p>
+          <pre><code>http://127.0.0.1:5173/</code></pre>
+          <figure class="shot"><img src="../docs/assets/screenshots/dev-home.png" alt="本地运行首页"><figcaption>本地运行首页。</figcaption></figure>
+        </section>
+
+        <section id="context">
+          <h2>2. 选择项目语境</h2>
+          <p>在左侧“项目类型”导航中选择竞赛项目、竞赛方向或个人项目。当前默认选中公益赛道。</p>
+          <ul>
+            <li>竞赛项目：包含公益赛道、米兰设计周、全国大学生设计创新实践大赛。</li>
+            <li>公益赛道：包含 5 个设计方向。</li>
+            <li>个人项目：包含毕业设计、课程作业、实践项目。</li>
+          </ul>
+          <figure class="shot"><img src="../docs/assets/screenshots/taxonomy-select.png" alt="分类导航选择"><figcaption>分类导航选择。</figcaption></figure>
+        </section>
+
+        <section id="form">
+          <h2>3. 填写作品信息</h2>
+          <p>竞赛项目下填写作品名称和作品说明。切换到个人项目后，表单会额外显示作品要求字段。</p>
+          <p>当前表单信息只参与本地 Mock 报告生成，不会上传到服务器。</p>
+          <figure class="shot"><img src="../docs/assets/screenshots/work-form.png" alt="作品信息表单"><figcaption>作品信息表单。</figcaption></figure>
+        </section>
+
+        <section id="upload">
+          <h2>4. 上传作品材料</h2>
+          <p>在“作品上传”区域点击上传框，或把文件拖入上传区域。图片文件会生成本地缩略图，非图片文件会显示扩展名占位。</p>
+          <ul>
+            <li>支持多文件追加。</li>
+            <li>支持双击缩略图打开预览。</li>
+            <li>支持删除文件和拖拽排序。</li>
+          </ul>
+          <figure class="shot"><img src="../docs/assets/screenshots/file-upload.png" alt="作品材料上传"><figcaption>作品材料上传。</figcaption></figure>
+        </section>
+
+        <section id="generate">
+          <h2>5. 生成预评审报告</h2>
+          <p>点击“生成预评审报告”后，前端会基于当前表单和分类语境匹配本地 Mock 案例，生成结构化报告，并在右侧历史记录中新增记录。</p>
+          <figure class="shot"><img src="../docs/assets/screenshots/generate-report.png" alt="生成预评审报告"><figcaption>生成预评审报告后的状态。</figcaption></figure>
+        </section>
+
+        <section id="export">
+          <h2>6. 保存或分享报告</h2>
+          <p>报告操作区提供分享、Markdown 下载和打印入口。当前“下载 PDF”实际调用浏览器打印流程，不是程序化生成 PDF 文件。</p>
+          <figure class="shot"><img src="../docs/assets/screenshots/report-actions.png" alt="报告操作菜单"><figcaption>报告操作菜单。</figcaption></figure>
+        </section>
+      </article>
+      <aside class="toc">
+        <p class="toc-title">本页目录</p>
+        <a href="#run">打开工作台</a>
+        <a href="#context">选择项目语境</a>
+        <a href="#form">填写作品信息</a>
+        <a href="#upload">上传作品材料</a>
+        <a href="#generate">生成报告</a>
+        <a href="#export">保存或分享</a>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>

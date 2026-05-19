@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>功能模块｜智能预评审</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./index.html"><span class="brand-title">智能预评审</span><span class="brand-subtitle">产品说明与使用指南</span></a>
+      <nav>
+        <div class="nav-section"><p class="nav-label">开始</p><a class="nav-link" href="./index.html">文档首页</a><a class="nav-link" href="./get-started.html">5 分钟快速上手</a><a class="nav-link" href="./product-intro.html">产品简介</a></div>
+        <div class="nav-section"><p class="nav-label">功能</p><a class="nav-link active" href="./features.html">功能模块</a><a class="nav-link" href="./ai-review-report.html">智能预评审报告</a></div>
+      </nav>
+    </aside>
+    <main class="page">
+      <article class="content">
+        <span class="eyebrow">Features</span>
+        <h1>功能模块</h1>
+        <p class="lead">本页按当前页面说明已实现功能、部分实现功能与规划中功能，暂不展开技术实现细节。</p>
+
+        <!-- 技术实现细节暂不展示：核心能力对应代码表已按当前文档需求隐藏。
+        <section id="overview">
+          <h2>核心能力速览</h2>
+          <table>
+            <thead><tr><th>能力</th><th>状态</th><th>对应代码</th></tr></thead>
+            <tbody>
+              <tr><td>项目类型与分类导航</td><td>已实现</td><td><code>src/components/taxonomyTree.js</code></td></tr>
+              <tr><td>作品信息填写</td><td>已实现</td><td><code>src/components/workForm.js</code></td></tr>
+              <tr><td>多文件上传与缩略图</td><td>已实现</td><td><code>src/components/fileUpload.js</code></td></tr>
+              <tr><td>文件预览弹层</td><td>已实现</td><td><code>src/components/previewModal.js</code></td></tr>
+              <tr><td>报告展示、分享、下载</td><td>已实现</td><td><code>src/components/reportPanel.js</code></td></tr>
+              <tr><td>历史记录</td><td>已实现</td><td><code>src/components/rightRail.js</code></td></tr>
+              <tr><td>AI 对话</td><td>部分实现</td><td><code>src/components/chatPanel.js</code></td></tr>
+              <tr><td>搜索、设置中心、报告目录</td><td>规划中 / 未接入</td><td><code>topBar.js</code>、<code>settingsModal.js</code>、<code>reportOutline.js</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        -->
+
+        <section id="taxonomy">
+          <h2>分类导航</h2>
+          <p>左侧分类导航用于决定本次预评审的项目语境。点击节点后，页面会根据所选项目类型更新表单展示。</p>
+          <ul>
+            <li>竞赛项目与个人项目均可选。</li>
+            <li>公益赛道支持展开和折叠。</li>
+            <li>当前选中节点会高亮。</li>
+            <li>个人项目会让表单额外显示“作品要求”。</li>
+          </ul>
+          <figure class="shot"><img src="../docs/assets/screenshots/left-taxonomy.png" alt="左侧分类导航"><figcaption>左侧分类导航。</figcaption></figure>
+        </section>
+
+        <section id="form">
+          <h2>作品信息表单</h2>
+          <p>作品信息表单用于收集生成报告所需文本。竞赛项目展示作品名称和作品说明；个人项目额外展示作品要求。</p>
+          <figure class="shot"><img src="../docs/assets/screenshots/personal-work-form.png" alt="个人项目表单状态"><figcaption>个人项目表单状态。</figcaption></figure>
+        </section>
+
+        <section id="upload">
+          <h2>作品上传与预览</h2>
+          <p>上传模块用于模拟作品主图、多文件材料和过程材料。</p>
+          <ul>
+            <li>支持点击选择文件和拖拽上传。</li>
+            <li>非图片显示扩展名占位。</li>
+            <li>支持删除和拖拽排序。</li>
+          </ul>
+          <figure class="shot"><img src="../docs/assets/screenshots/upload-list.png" alt="上传文件列表"><figcaption>上传文件列表。</figcaption></figure>
+          <figure class="shot"><img src="../docs/assets/screenshots/file-preview-modal.png" alt="文件预览弹层"><figcaption>文件预览弹层。</figcaption></figure>
+        </section>
+
+        <section id="report-actions">
+          <h2>报告操作</h2>
+          <p>报告操作位于正式预评审报告上方，包含分享、Markdown 下载和打印入口。</p>
+          <ul>
+            <li>分享：提供当前报告的分享入口。</li>
+            <li>Markdown 下载：导出当前报告文本。</li>
+            <li>PDF 下载：当前通过浏览器打印流程保存。</li>
+          </ul>
+          <figure class="shot shot-sm"><img src="../docs/assets/screenshots/report-share-panel.png" alt="报告分享面板"><figcaption>报告分享面板。</figcaption></figure>
+        </section>
+
+        <section id="history">
+          <h2>历史记录</h2>
+          <p>右侧历史栏初始显示 3 条静态记录。新生成报告会创建新历史记录，最多保留 12 条。</p>
+          <p>当前“查看”只切换高亮，不会恢复旧报告正文。完整历史回访属于规划中能力。</p>
+          <figure class="shot"><img src="../docs/assets/screenshots/history-panel.png" alt="右侧历史记录"><figcaption>右侧历史记录。</figcaption></figure>
+        </section>
+
+        <section id="chat-theme">
+          <h2>AI 对话与主题切换</h2>
+          <p>AI 对话当前仅提供模拟回复。“保持图片上下文”复选框只展示 UI，没有参与真实对话逻辑。主题切换用于查看日间和夜间界面状态。</p>
+          <figure class="shot"><img src="../docs/assets/screenshots/chat-panel.png" alt="AI 对话面板"><figcaption>AI 对话面板。</figcaption></figure>
+          <figure class="shot"><img src="../docs/assets/screenshots/night-theme.png" alt="夜间主题"><figcaption>夜间主题。</figcaption></figure>
+        </section>
+      </article>
+      <aside class="toc">
+        <p class="toc-title">本页目录</p>
+        <!-- 技术实现细节暂不展示：核心能力速览目录项隐藏。 -->
+        <a href="#taxonomy">分类导航</a>
+        <a href="#form">作品信息表单</a>
+        <a href="#upload">作品上传与预览</a>
+        <a href="#report-actions">报告操作</a>
+        <a href="#history">历史记录</a>
+        <a href="#chat-theme">AI 对话与主题</a>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>

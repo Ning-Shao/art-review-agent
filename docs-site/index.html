@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>智能预评审文档</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./index.html">
+        <span class="brand-title">智能预评审</span>
+        <span class="brand-subtitle">产品说明与使用指南</span>
+      </a>
+      <nav>
+        <div class="nav-section">
+          <p class="nav-label">开始</p>
+          <a class="nav-link active" href="./index.html">文档首页</a>
+          <a class="nav-link" href="./get-started.html">5 分钟快速上手</a>
+          <a class="nav-link" href="./product-intro.html">产品简介</a>
+        </div>
+        <div class="nav-section">
+          <p class="nav-label">功能</p>
+          <a class="nav-link" href="./features.html">功能模块</a>
+          <a class="nav-link" href="./ai-review-report.html">智能预评审报告</a>
+        </div>
+      </nav>
+    </aside>
+    <main class="page">
+      <article class="content">
+        <span class="eyebrow">Documentation</span>
+        <h1>智能预评审</h1>
+        <p class="lead">一个基于原生 HTML、CSS、JavaScript 的静态产品 Demo，用于展示艺术与设计作品从材料上传到 Mock 智能预评审报告生成的工作台流程。</p>
+        <figure class="shot">
+          <img src="../docs/assets/screenshots/home-overview.png" alt="产品首页总览">
+          <figcaption>本地 Demo 首页总览，截图来自 http://127.0.0.1:5173/。</figcaption>
+        </figure>
+
+        <section id="scope">
+          <h2>当前版本边界</h2>
+          <div class="grid">
+            <div class="card">
+              <span class="status">已实现</span>
+              <h3>静态工作台闭环</h3>
+              <p>已覆盖项目类型选择、作品信息填写、多文件上传、缩略图预览、Mock 报告生成、历史记录和主题切换。</p>
+            </div>
+            <div class="card">
+              <span class="status">部分实现</span>
+              <h3>AI 对话</h3>
+              <p>当前仅追加固定模拟回复，不连接真实模型，也不会读取当前报告或上传图片上下文。</p>
+            </div>
+            <div class="card">
+              <span class="status">未接入</span>
+              <h3>真实大模型 API</h3>
+              <p>当前没有后端服务、没有 API key、没有真实网络请求。真实模型能力属于未来版本。</p>
+            </div>
+            <div class="card">
+              <span class="status">规划中</span>
+              <h3>产品化补齐</h3>
+              <p>设置中心、报告目录、完整历史回访、程序化 PDF、搜索结果等能力尚未接入。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="journey">
+          <h2>主流程</h2>
+          <ol>
+            <li>选择竞赛项目、竞赛方向或个人项目语境。</li>
+            <li>填写作品名称、作品说明；个人项目可补充作品要求。</li>
+            <li>上传作品图片、多文件材料或过程材料。</li>
+            <li>点击生成预评审报告，读取本地 Mock 数据生成结构化报告。</li>
+            <li>查看综合分、维度评分、主要优点、主要问题、修改建议和提交前检查清单。</li>
+            <li>通过分享链接、Markdown 下载或打印入口保存报告。</li>
+          </ol>
+          <figure class="shot">
+            <img src="../docs/assets/screenshots/core-scenario.png" alt="核心使用场景">
+            <figcaption>核心使用场景：从项目语境选择到生成报告。</figcaption>
+          </figure>
+        </section>
+
+        <section id="map">
+          <h2>文档导航</h2>
+          <div class="page-links">
+            <a href="./get-started.html">快速上手</a>
+            <a href="./product-intro.html">了解产品定位</a>
+            <a href="./features.html">查看功能模块</a>
+            <a href="./ai-review-report.html">理解报告与 Mock 逻辑</a>
+          </div>
+        </section>
+      </article>
+      <aside class="toc">
+        <p class="toc-title">本页目录</p>
+        <a href="#scope">当前版本边界</a>
+        <a href="#journey">主流程</a>
+        <a href="#map">文档导航</a>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>

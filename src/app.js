@@ -1,4 +1,5 @@
 import { createReviewStore } from './state/reviewStore.js';
+import { bindChatPanel } from './components/chatPanel.js';
 import { bindFileUpload } from './components/fileUpload.js';
 import { bindPreviewModal, renderPreviewModal } from './components/previewModal.js';
 import { bindReportPanel, updateReportPanel } from './components/reportPanel.js';
@@ -31,6 +32,7 @@ export function createApp(root) {
   });
   bindFileUpload(store, previewController);
   bindReportPanel();
+  bindChatPanel();
   renderPersistedHistoryRecords(store.history);
   bindRightRail(store);
   bindWorkspace();

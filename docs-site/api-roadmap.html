@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API 与 Roadmap｜智能预评审</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./index.html"><span class="brand-title">智能预评审</span><span class="brand-subtitle">产品说明与使用指南</span></a>
+      <nav>
+        <div class="nav-section"><p class="nav-label">开始</p><a class="nav-link" href="./index.html">文档首页</a><a class="nav-link" href="./get-started.html">5 分钟快速上手</a><a class="nav-link" href="./product-intro.html">产品简介</a></div>
+        <div class="nav-section"><p class="nav-label">功能</p><a class="nav-link" href="./features.html">功能模块</a><a class="nav-link" href="./ai-review-report.html">智能预评审报告</a></div>
+      </nav>
+    </aside>
+    <main class="page">
+      <article class="content">
+        <span class="eyebrow">API Roadmap</span>
+        <h1>后续 API 接入与 Roadmap</h1>
+        <p class="lead">当前 Demo 不接真实 API。未来接入真实大模型时，应采用后端代理结构，避免 API key 暴露在浏览器端。</p>
+
+        <section id="architecture">
+          <h2>推荐技术结构</h2>
+          <pre><code>浏览器静态前端
+  -> POST /api/reviews
+后端代理 / Serverless Function
+  -> 读取服务端环境变量中的 API key
+  -> 校验、裁剪、脱敏前端输入
+  -> 调用真实大模型 API
+  -> 返回结构化评审结果
+前端报告面板
+  -> 渲染真实评审结果
+  -> 写入历史记录</code></pre>
+          <figure class="shot"><img src="../docs/assets/screenshots/api-architecture.png" alt="真实模型接入架构"><figcaption>真实模型接入架构。</figcaption></figure>
+        </section>
+
+        <section id="frontend">
+          <h2>前端改造点</h2>
+          <table>
+            <thead><tr><th>当前模块</th><th>未来版本改造方向</th></tr></thead>
+            <tbody>
+              <tr><td><code>src/services/aiReviewService.mock.js</code></td><td>替换为调用 <code>/api/reviews</code> 的真实 service，或新增真实 service 后按环境切换。</td></tr>
+              <tr><td><code>src/data/mockCases.js</code></td><td>保留为 Demo / fallback 数据，不再作为正式评分来源。</td></tr>
+              <tr><td><code>src/data/mockReport.js</code></td><td>保留报告结构适配层，把 API 返回结果规范化为前端 report。</td></tr>
+              <tr><td><code>src/components/workForm.js</code></td><td>增加 loading、错误态、重试和禁用状态。</td></tr>
+              <tr><td><code>src/components/fileUpload.js</code></td><td>明确文件上传策略：元数据、base64、对象存储 URL 或后端处理文件。</td></tr>
+              <tr><td><code>src/components/chatPanel.js</code></td><td>接入对话 API，并决定是否携带报告和图片上下文。</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="backend">
+          <h2>后端职责</h2>
+          <ul>
+            <li>读取服务端 API key。</li>
+            <li>校验作品标题、说明、项目类型、上传材料元数据等输入。</li>
+            <li>控制文本长度、图片数量和单次请求成本。</li>
+            <li>调用真实模型 API。</li>
+            <li>返回稳定的结构化 JSON。</li>
+            <li>处理错误、超时、重试和日志脱敏。</li>
+            <li>做基础速率限制，避免 Demo 被滥用。</li>
+          </ul>
+        </section>
+
+        <section id="roadmap">
+          <h2>Roadmap</h2>
+          <div class="grid">
+            <div class="card"><span class="status">V0.1 当前版本</span><h3>静态 Mock Demo</h3><p>完成单页工作台，跑通分类选择、作品信息、上传、Mock 报告和历史记录闭环。</p></div>
+            <div class="card"><span class="status">V0.2 规划中</span><h3>增强前端闭环</h3><p>接入报告目录、设置中心入口、完整历史回访、生成状态和数据驱动分类树。</p></div>
+            <div class="card"><span class="status">V0.3 未来版本</span><h3>真实模型评审</h3><p>新增后端代理，替换 Mock service，设计结构化评审结果 schema。</p></div>
+            <div class="card"><span class="status">V0.4 未来版本</span><h3>持久化与团队使用</h3><p>增加身份、项目空间、完整报告保存、PDF 导出和检索管理能力。</p></div>
+          </div>
+        </section>
+      </article>
+      <aside class="toc">
+        <p class="toc-title">本页目录</p>
+        <a href="#architecture">推荐技术结构</a>
+        <a href="#frontend">前端改造点</a>
+        <a href="#backend">后端职责</a>
+        <a href="#roadmap">Roadmap</a>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>

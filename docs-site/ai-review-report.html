@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>智能预评审报告｜智能预评审</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./index.html"><span class="brand-title">智能预评审</span><span class="brand-subtitle">产品说明与使用指南</span></a>
+      <nav>
+        <div class="nav-section"><p class="nav-label">开始</p><a class="nav-link" href="./index.html">文档首页</a><a class="nav-link" href="./get-started.html">5 分钟快速上手</a><a class="nav-link" href="./product-intro.html">产品简介</a></div>
+        <div class="nav-section"><p class="nav-label">功能</p><a class="nav-link" href="./features.html">功能模块</a><a class="nav-link active" href="./ai-review-report.html">智能预评审报告</a></div>
+      </nav>
+    </aside>
+    <main class="page">
+      <article class="content">
+        <span class="eyebrow">Review Report</span>
+        <h1>智能预评审报告说明</h1>
+        <p class="lead">当前报告以结构化方式呈现赛前预评审结果，帮助用户快速查看作品概览、评分维度、主要问题和修改建议。</p>
+
+        <section id="structure">
+          <h2>报告结构</h2>
+          <table>
+            <thead><tr><th>报告部分</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>作品概览</td><td>展示作品类型、主题方向、适合竞赛类别和完成度判断。</td></tr>
+              <tr><td>作品基本信息</td><td>展示作品名称、评测类型、竞赛节点和媒体节点。</td></tr>
+              <tr><td>总评分</td><td>展示总分、等级和总体建议。</td></tr>
+              <tr><td>整体评价</td><td>围绕主题、竞赛语境、材料完整度和评审阅读路径描述。</td></tr>
+              <tr><td>维度评分</td><td>展示 5 个评分维度的分数和解释。</td></tr>
+              <tr><td>主要优点 / 问题 / 建议</td><td>列出优势、短板和可执行的修改方向。</td></tr>
+              <tr><td>提交前检查清单</td><td>提醒信息一致性、材料规格、错别字等提交风险。</td></tr>
+              <tr><td>参赛方向匹配度</td><td>说明作品与当前赛道或类别的匹配关系。</td></tr>
+            </tbody>
+          </table>
+          <figure class="shot"><img src="../docs/assets/screenshots/report-structure.png" alt="报告内容结构"><figcaption>报告内容结构。</figcaption></figure>
+        </section>
+
+        <section id="rubrics">
+          <h2>评分维度与等级</h2>
+          <p>当前报告包含 5 个评分维度：主题契合度、视觉表现、创新性、叙事完整度、竞赛适配度。</p>
+          <table>
+            <thead><tr><th>分数区间</th><th>等级</th></tr></thead>
+            <tbody>
+              <tr><td>88 分及以上</td><td>优秀</td></tr>
+              <tr><td>76 分及以上</td><td>可进入初审</td></tr>
+              <tr><td>62 分及以上</td><td>需要明显修改</td></tr>
+              <tr><td>0 分及以上</td><td>不建议直接提交</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Mock 相关技术内容暂不展示。
+        <section id="mock">
+          <h2>当前 Mock AI 逻辑</h2>
+          <p>当前项目没有真实网络请求，也没有真实大模型调用。点击生成报告后，前端完全基于本地 Mock 数据组装结果。</p>
+          <table>
+            <thead><tr><th>数据文件</th><th>作用</th></tr></thead>
+            <tbody>
+              <tr><td><code>src/data/mockCases.js</code></td><td>维护 5 个模拟作品案例，包括主题、类别、优缺点、建议和基础评分。</td></tr>
+              <tr><td><code>src/data/reviewRubrics.js</code></td><td>维护评分维度、等级规则、分数裁剪和总分计算。</td></tr>
+              <tr><td><code>src/data/mockReport.js</code></td><td>根据当前输入、匹配案例和评分规则组装正式报告。</td></tr>
+            </tbody>
+          </table>
+        </section>
+        -->
+
+        <!-- 生成流程技术细节暂不展示。
+        <section id="flow">
+          <h2>生成流程</h2>
+          <pre><code>作品表单输入 + 当前分类语境
+  -> generateMockReview(work)
+  -> buildMockReport(work)
+  -> findBestMockCase(work)
+  -> normalizeWork(workInput, mockCase)
+  -> tuneScoreProfile(mockCase, work)
+  -> getTotalScore(scoreProfile)
+  -> getScoreLevel(totalScore)
+  -> 返回结构化 report</code></pre>
+        </section>
+        -->
+
+        <section id="limits">
+          <h2>重要限制</h2>
+          <ul>
+            <li>当前报告用于 Demo 演示和产品沟通，不应作为正式评审结论。</li>
+            <li>当前上传图片仅用于界面展示，不参与真实图像理解。</li>
+            <li>当前 AI 对话仍是演示入口，未来版本可继续扩展。</li>
+          </ul>
+        </section>
+      </article>
+      <aside class="toc">
+        <p class="toc-title">本页目录</p>
+        <a href="#structure">报告结构</a>
+        <a href="#rubrics">评分维度与等级</a>
+        <!-- Mock 与生成流程目录项暂不展示。 -->
+        <a href="#limits">重要限制</a>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>

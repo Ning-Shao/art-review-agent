@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>产品简介｜智能预评审</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./index.html"><span class="brand-title">智能预评审</span><span class="brand-subtitle">产品说明与使用指南</span></a>
+      <nav>
+        <div class="nav-section"><p class="nav-label">开始</p><a class="nav-link" href="./index.html">文档首页</a><a class="nav-link" href="./get-started.html">5 分钟快速上手</a><a class="nav-link active" href="./product-intro.html">产品简介</a></div>
+        <div class="nav-section"><p class="nav-label">功能</p><a class="nav-link" href="./features.html">功能模块</a><a class="nav-link" href="./ai-review-report.html">智能预评审报告</a></div>
+      </nav>
+    </aside>
+    <main class="page">
+      <article class="content">
+        <span class="eyebrow">Product Intro</span>
+        <h1>产品简介</h1>
+        <p class="lead">智能预评审面向艺术与设计作品赛前评审场景，当前版本用于产品沟通、设计评审、技术方案讨论和后续 API 接入验证。</p>
+
+        <section id="positioning">
+          <h2>产品定位</h2>
+          <p>当前产品不是正式在线评审系统，而是静态前端 MVP 原型。它展示作品材料输入、Mock 评审报告输出和基础历史记录管理的工作台闭环。</p>
+          <div class="notice">当前版本不接入真实大模型 API，不包含后端服务，也不会把上传材料发送到服务器。</div>
+          <figure class="shot"><img src="../docs/assets/screenshots/home-overview.png" alt="产品首页总览"><figcaption>工作台整体形态。</figcaption></figure>
+        </section>
+
+        <section id="users">
+          <h2>目标用户</h2>
+          <table>
+            <thead><tr><th>用户类型</th><th>关注点</th><th>当前支持方式</th></tr></thead>
+            <tbody>
+              <tr><td>老板 / 业务负责人</td><td>判断产品方向和 MVP 价值</td><td>通过单页闭环展示预评审流程。</td></tr>
+              <tr><td>产品经理</td><td>梳理路径和迭代范围</td><td>基于分类、表单、报告、历史记录讨论功能边界。</td></tr>
+              <tr><td>设计团队</td><td>观察信息架构和界面状态</td><td>提供三栏工作台、报告面板、上传面板和主题切换。</td></tr>
+              <tr><td>技术团队</td><td>判断模块拆分和 API 替换点</td><td>代码按 components、state、data、services、styles 拆分。</td></tr>
+              <tr><td>学生 / 参赛者</td><td>赛前获得预评审建议</td><td>当前通过 Mock 报告模拟评审结果。</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="interface">
+          <h2>界面总览</h2>
+          <p>当前工作台采用顶部栏、左侧分类导航、中间工作区、右侧历史记录的文档化布局。</p>
+          <table>
+            <thead><tr><th>区域</th><th>功能</th><th>状态</th></tr></thead>
+            <tbody>
+              <tr><td>顶部栏</td><td>品牌标题、搜索框、日夜主题切换</td><td>搜索仅 UI；主题切换已实现。</td></tr>
+              <tr><td>左侧分类导航</td><td>选择竞赛或个人项目语境</td><td>已实现。</td></tr>
+              <tr><td>中间工作区</td><td>作品信息、上传、报告、AI 对话</td><td>主流程已实现；AI 对话为模拟回复。</td></tr>
+              <tr><td>右侧历史记录</td><td>展示历史记录和更多操作</td><td>已实现基础操作。</td></tr>
+            </tbody>
+          </table>
+          <figure class="shot"><img src="../docs/assets/screenshots/interface-overview.png" alt="界面区域说明"><figcaption>界面区域说明。</figcaption></figure>
+        </section>
+
+        <section id="mvp">
+          <h2>MVP 范围</h2>
+          <div class="grid">
+            <div class="card"><h3>当前包含</h3><p>单页工作台、分类选择、作品信息、文件上传、文件预览、Mock 报告、报告操作、历史记录和主题切换。</p></div>
+            <div class="card"><h3>暂不包含</h3><p>真实模型评审、后端数据库、账号体系、云端文件存储、图片识别、完整历史回访和程序化 PDF。</p></div>
+          </div>
+        </section>
+      </article>
+      <aside class="toc">
+        <p class="toc-title">本页目录</p>
+        <a href="#positioning">产品定位</a>
+        <a href="#users">目标用户</a>
+        <a href="#interface">界面总览</a>
+        <a href="#mvp">MVP 范围</a>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
