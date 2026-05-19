@@ -9,6 +9,9 @@ export function renderTaxonomyTree() {
 export function bindTaxonomyTree(store) {
   const breadcrumb = document.getElementById(DOM_IDS.breadcrumb);
   document.querySelectorAll('.tree button').forEach((button) => {
+    const nodeText = button.querySelector('.node-text');
+    const label = nodeText && nodeText.textContent.trim();
+    if (label) button.setAttribute('title', label);
     button.addEventListener('click', () => {
       const item = button.closest('li');
       const childList = item && item.querySelector(':scope > ul');
