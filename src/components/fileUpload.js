@@ -3,7 +3,7 @@ import { addUploadFiles, getExtension, removeUploadFile, reorderUploadFiles } fr
 
 export function renderFileUpload() {
 
-  return "<div class=\"panel upload-panel\">\n            <div>\n              <h2 class=\"panel-title\">作品上传</h2>\n              <p class=\"panel-copy\">支持单图、多文件和过程材料。第一张图片作为历史记录缩略图。</p>\n            </div>\n            <div class=\"upload-drop\" id=\"uploadDrop\" role=\"button\" tabindex=\"0\" aria-label=\"上传作品图片或多文件材料\">\n              <div>\n                <strong>+</strong>\n                上传作品图片 / 多文件材料\n              </div>\n            </div>\n            <input id=\"fileInput\" type=\"file\" multiple hidden>\n            <p class=\"upload-meta\" id=\"uploadMeta\">已上传（双击缩略图放大）</p>\n            <ul class=\"file-list\" id=\"fileList\" aria-live=\"polite\"></ul>\n          </div>";
+  return "<div class=\"panel upload-panel\">\n            <div>\n              <h2 class=\"panel-title\">作品上传</h2>\n              <p class=\"panel-copy\">支持单图、多文件和过程材料。第一张图片作为历史记录缩略图。</p>\n            </div>\n            <div class=\"upload-drop\" id=\"uploadDrop\" role=\"button\" tabindex=\"0\" aria-label=\"上传作品图片或多文件材料\">\n              <div>\n                <strong>+</strong>\n                上传作品图片 / 多文件材料\n              </div>\n            </div>\n            <input id=\"fileInput\" type=\"file\" multiple hidden>\n            <p class=\"upload-meta\" id=\"uploadMeta\">已上传（双击缩略图放大）（拖拽调整排序）</p>\n            <ul class=\"file-list\" id=\"fileList\" aria-live=\"polite\"></ul>\n          </div>";
 
 }
 
@@ -18,7 +18,7 @@ export function bindFileUpload(store, previewController) {
   function renderFiles() {
     if (!fileList || !uploadMeta) return;
     fileList.innerHTML = '';
-    uploadMeta.textContent = store.uploads.length ? '已上传（双击缩略图放大）' : '尚未上传文件';
+    uploadMeta.textContent = store.uploads.length ? '已上传（双击缩略图放大）（拖拽调整排序）' : '尚未上传文件';
     store.uploads.forEach((item) => {
       const li = document.createElement('li');
       li.className = 'file-item';
