@@ -1,6 +1,6 @@
 .work-grid {
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
       gap: 18px;
       margin-top: 26px;
       align-items: stretch;
@@ -134,6 +134,7 @@
     }
 
     .panel {
+      min-width: 0;
       padding: 18px;
     }
 

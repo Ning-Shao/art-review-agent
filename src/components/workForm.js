@@ -107,6 +107,10 @@ export function bindWorkForm(store, handlers = {}) {
   const button = document.querySelector('.cta');
   if (!button) return;
   button.addEventListener('click', async () => {
+    if (!store.uploads.length) {
+      temporarilyLabel(button, '请先上传作品');
+      return;
+    }
     const report = await generateMockReview(getWorkFormValues(store));
     if (handlers.onReportGenerated) handlers.onReportGenerated(report);
     temporarilyLabel(button, '已生成报告');

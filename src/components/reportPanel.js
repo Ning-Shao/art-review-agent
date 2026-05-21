@@ -1,9 +1,8 @@
 import { DOM_IDS } from '../ids.js';
-import { mockReportTemplate } from '../data/mockReport.js';
 import { downloadTextFile } from '../utils/file.js';
 
 export function renderReportPanel() {
-  return "<section class=\"report-section\" aria-label=\"正式预评审报告\">\n          <div class=\"section-head\">\n            <div>\n              <h2>正式预评审报告</h2>\n              <p>面向老师、学生和参赛提交场景整理成可阅读、分享和下载的文本报告。</p>\n            </div>\n            <div class=\"score\" aria-label=\"综合分 " + mockReportTemplate.score + "\"><span>" + mockReportTemplate.score + "</span></div>\n          </div>\n\n          <div class=\"formal-report\" id=\"formalReport\">" + renderFormalReport(mockReportTemplate) + "</div>\n        </section>";
+  return "<section class=\"report-section\" aria-label=\"正式预评审报告\" hidden>\n          <div class=\"section-head\">\n            <div>\n              <h2>正式预评审报告</h2>\n              <p>面向老师、学生和参赛提交场景整理成可阅读、分享和下载的文本报告。</p>\n            </div>\n          </div>\n\n          <div class=\"formal-report\" id=\"formalReport\"></div>\n        </section>";
 }
 
 function temporarilyLabel(button, label) {
@@ -125,17 +124,10 @@ function renderFormalReport(report) {
 }
 
 export function updateReportPanel(report) {
-  const score = document.querySelector('.score');
-  const scoreText = score && score.querySelector('span');
   const formalReport = document.getElementById(DOM_IDS.formalReport);
   if (!formalReport) return;
-
-  if (score) {
-    score.setAttribute('aria-label', '综合分 ' + report.score + '，' + (report.grade || ''));
-    score.style.background = 'conic-gradient(var(--accent) 0 ' + report.score + '%, #e6e6e6 ' + report.score + '% 100%)';
-  }
-  if (scoreText) scoreText.textContent = String(report.score);
-
+  const reportSection = formalReport.closest('.report-section');
+  if (reportSection) reportSection.hidden = false;
   formalReport.innerHTML = renderFormalReport(report);
 }
 

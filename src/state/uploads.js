@@ -1,6 +1,4 @@
-import { seedFiles } from '../data/seedFiles.js';
-
-export function createUploadState(initialFiles = seedFiles) {
+export function createUploadState(initialFiles = []) {
   return initialFiles.map((item) => ({ ...item }));
 }
 
