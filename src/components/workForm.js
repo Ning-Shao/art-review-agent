@@ -1,8 +1,10 @@
 import { generateMockReview } from '../services/aiReviewService.mock.js';
 
+let requirementFiles = [];
+
 export function renderWorkForm() {
 
-  return "<div class=\"panel\">\n            <h2 class=\"panel-title\">作品信息</h2>\n            <p class=\"panel-copy\">根据左侧项目类型填写作品信息。</p>\n            <div class=\"field-grid\" id=\"workFieldGrid\"></div>\n            <button class=\"cta\" type=\"button\">生成预评审报告</button>\n          </div>";
+  return "<div class=\"panel work-form-panel\">\n            <h2 class=\"panel-title\">作品信息</h2>\n            <p class=\"panel-copy\">根据左侧项目类型填写作品信息。</p>\n            <div class=\"field-grid\" id=\"workFieldGrid\"></div>\n          </div>";
 
 }
 
@@ -13,7 +15,7 @@ function temporarilyLabel(button, label) {
 }
 
 function renderFieldGrid(projectType) {
-  const shouldShowRequirement = projectType === 'personal';
+  const shouldShowRequirement = projectType === 'custom' || projectType === 'personal';
   return '<div class="field full">' +
       '<label for="title">作品名称</label>' +
       '<input id="title" value="土特产宣传海报设计">' +
@@ -26,6 +28,12 @@ function renderFieldGrid(projectType) {
       ? '<div class="field full">' +
           '<label for="requirement">作品要求</label>' +
           '<textarea id="requirement">请填写课程、毕业设计或实践项目对主题、格式、成果数量、提交规范等方面的具体要求。</textarea>' +
+          '<div class="requirement-upload">' +
+            '<button class="requirement-upload-button" id="requirementFileButton" type="button">上传要求文档</button>' +
+            '<span>支持任务书、课程要求、竞赛补充说明等材料</span>' +
+            '<input id="requirementFileInput" type="file" multiple hidden>' +
+          '</div>' +
+          '<ul class="requirement-file-list" id="requirementFileList" aria-live="polite"></ul>' +
         '</div>'
       : '');
 }
@@ -39,16 +47,38 @@ function getWorkFormValues(store) {
   const title = document.getElementById('title')?.value.trim();
   const description = document.getElementById('desc')?.value.trim();
   const requirement = document.getElementById('requirement')?.value.trim();
+  const requirementFileText = requirementFiles.length ? '要求文档：' + requirementFiles.map((file) => file.name).join('、') : '';
   return {
     title,
-    mode: store.selectedProjectType === 'personal' ? '个人项目预评审' : '竞赛项目预评审',
+    mode: store.selectedProjectType === 'custom' || store.selectedProjectType === 'personal' ? '自定义项目预评审' : '竞赛项目预评审',
     category: contextText.split(' / ')[0] || '竞赛项目',
     track: contextText.split(' / ').slice(1).join(' / ') || contextText,
     theme: '',
-    description: [description, requirement ? '作品要求：' + requirement : ''].filter(Boolean).join('\n'),
+    description: [description, requirement ? '作品要求：' + requirement : '', requirementFileText].filter(Boolean).join('\n'),
     breadcrumb: contextText,
     mediaNode: contextText,
   };
+}
+
+function renderRequirementFiles() {
+  const list = document.getElementById('requirementFileList');
+  if (!list) return;
+  list.innerHTML = requirementFiles.length
+    ? requirementFiles.map((file) => '<li>' + file.name + '</li>').join('')
+    : '<li class="empty">尚未上传要求文档</li>';
+}
+
+function bindRequirementUpload() {
+  const input = document.getElementById('requirementFileInput');
+  const button = document.getElementById('requirementFileButton');
+  if (!input || !button) return;
+  button.addEventListener('click', () => input.click());
+  input.addEventListener('change', () => {
+    requirementFiles = Array.from(input.files || []).map((file) => ({ name: file.name }));
+    renderRequirementFiles();
+    input.value = '';
+  });
+  renderRequirementFiles();
 }
 
 function updateWorkFields(projectType) {
@@ -62,9 +92,10 @@ function updateWorkFields(projectType) {
   fieldGrid.innerHTML = renderFieldGrid(projectType);
   if (currentValues.title) document.getElementById('title').value = currentValues.title;
   if (currentValues.desc) document.getElementById('desc').value = currentValues.desc;
-  if (projectType === 'personal' && currentValues.requirement) {
+  if ((projectType === 'custom' || projectType === 'personal') && currentValues.requirement) {
     document.getElementById('requirement').value = currentValues.requirement;
   }
+  bindRequirementUpload();
 }
 
 export function bindWorkForm(store, handlers = {}) {

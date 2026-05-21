@@ -13,7 +13,7 @@
       z-index: 30;
       height: var(--top-h);
       display: grid;
-      grid-template-columns: minmax(220px, 1fr) minmax(260px, 360px) minmax(180px, 1fr);
+      grid-template-columns: minmax(220px, 1fr) auto;
       align-items: center;
       gap: 24px;
       padding: 0 44px;
@@ -110,15 +110,56 @@
       font-weight: 700;
     }
 
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .auth-button {
+      min-height: 42px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--inverse-text);
+      background: var(--dark-control);
+      font-size: 14px;
+      font-weight: 900;
+      white-space: nowrap;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .auth-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+    }
+
     .mode-toggle {
-      justify-self: end;
+      position: fixed;
+      right: max(22px, calc((100vw - 1400px) / 2 + 22px));
+      bottom: 24px;
+      z-index: 40;
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
       color: var(--text);
+      background: var(--control-bg);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
       font-size: 16px;
       font-weight: 700;
       white-space: nowrap;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .mode-toggle:hover {
+      transform: translateY(-1px);
+      background: var(--active);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
     }
 
     .shell {
@@ -144,7 +185,7 @@
       height: calc(100vh - var(--top-h));
       min-width: 0;
       border-right: 1px solid var(--line);
-      padding: 18px 14px 86px;
+      padding: 18px 14px 28px;
       overflow-y: auto;
       overscroll-behavior: contain;
       transition: padding 180ms ease;
@@ -220,12 +261,33 @@
       color: var(--muted);
       text-align: left;
       font-size: 14px;
+      transition: color 160ms ease, background 160ms ease, transform 160ms ease;
     }
 
     .tree button.active {
       color: #111;
       background: var(--active);
       font-weight: 900;
+    }
+
+    .tree button:not(:disabled):not(.disabled-node):hover {
+      color: var(--text);
+      background: var(--active);
+      transform: translateX(1px);
+    }
+
+    .tree button.disabled-node,
+    .tree button:disabled {
+      color: #a4aebc;
+      cursor: not-allowed;
+      opacity: 0.56;
+    }
+
+    .tree button.disabled-node .badge,
+    .tree button:disabled .badge {
+      color: #9aa4b2;
+      border-color: #dbe3ee;
+      background: #eef3f8;
     }
 
     .node-system-note {
@@ -242,33 +304,6 @@
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 0;
-    }
-
-    .settings-launch {
-      position: fixed;
-      left: max(14px, calc((100vw - 1400px) / 2 + 14px));
-      bottom: 28px;
-      z-index: 35;
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      margin-top: 0;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--text);
-      background: var(--control-bg);
-      box-shadow: 0 -10px 18px rgba(255, 255, 255, 0.8);
-    }
-
-    body[data-theme="night"] .settings-launch {
-      box-shadow: 0 -10px 18px rgba(39, 55, 77, 0.24);
-    }
-
-    .settings-launch svg {
-      width: 18px;
-      height: 18px;
-      flex: 0 0 auto;
     }
 
     .tree li.collapsed > ul {

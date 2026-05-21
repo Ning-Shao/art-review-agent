@@ -31,13 +31,14 @@
       }
 
       .topbar {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) auto;
         gap: 14px;
         padding: 18px;
       }
 
       .mode-toggle {
-        justify-self: start;
+        right: 18px;
+        bottom: 18px;
       }
 
       .shell {
@@ -95,5 +96,11 @@
 
       .message {
         max-width: 100%;
+      }
+
+      .report-text-head,
+      .requirement-upload {
+        align-items: stretch;
+        flex-direction: column;
       }
     }
