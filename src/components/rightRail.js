@@ -3,7 +3,7 @@ import { activateHistoryItem, deleteHistoryItem, persistHistory, renameHistoryIt
 import { renderHistoryPanel } from './historyPanel.js';
 
 export function renderRightRail() {
-  return "<aside class=\"right-rail\" aria-label=\"历史记录\">\n        <div class=\"collapsed-tools\" aria-label=\"折叠后的历史记录栏\">\n          <span class=\"collapse-round\" aria-hidden=\"true\">\n            <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n              <path d=\"M3 12a9 9 0 1 0 3-6.7\"></path>\n              <path d=\"M3 4v5h5\"></path>\n              <path d=\"M12 7v6l4 2\"></path>\n            </svg>\n          </span>\n          <button class=\"collapse-card\" id=\"expandRight\" type=\"button\" aria-label=\"展开历史记录\">‹</button>\n        </div>\n" + renderHistoryPanel() + "\n      </aside>";
+  return "<aside class=\"right-rail\" aria-label=\"历史记录\">\n        <div class=\"collapsed-tools\" aria-label=\"折叠后的历史记录栏\">\n          <button class=\"collapse-card\" id=\"expandRight\" type=\"button\" aria-label=\"展开历史记录\">‹</button>\n        </div>\n" + renderHistoryPanel() + "\n      </aside>";
 }
 
 export function renderHistoryMenu() {
@@ -19,13 +19,19 @@ function createHistoryCard(record) {
     '<div class="history-info">' +
       '<strong></strong>' +
       '<span></span>' +
-      '<span></span>' +
     '</div>' +
     '<button class="more" type="button" aria-label="更多操作">...</button>';
   li.querySelector('strong').textContent = record.title;
+  const thumb = li.querySelector('.history-thumb');
+  if (thumb && record.coverUrl) {
+    const img = document.createElement('img');
+    img.src = record.coverUrl;
+    img.alt = record.coverAlt || record.title;
+    img.addEventListener('error', () => img.remove());
+    thumb.appendChild(img);
+  }
   const spans = li.querySelectorAll('.history-info span');
-  spans[0].textContent = record.meta;
-  spans[1].textContent = record.timeLabel;
+  spans[0].textContent = record.timeLabel;
   return li;
 }
 
@@ -53,19 +59,27 @@ export function bindRightRail(store) {
   function updateShellColumns() {
     if (!shell || !workspace) return;
     const rootStyle = getComputedStyle(document.documentElement);
-    const openLeft = rootStyle.getPropertyValue('--left-w').trim() || '274px';
+    const openLeft = rootStyle.getPropertyValue('--left-w').trim() || '300px';
     const openRight = rootStyle.getPropertyValue('--right-w').trim() || '238px';
     const rightCollapsed = shell.classList.contains('right-collapsed');
+    const rightWidthValue = Number.parseFloat(openRight);
     const right = rightCollapsed ? '44px' : openRight;
-    const rightOffset = rightCollapsed ? Number.parseFloat(openRight) - 44 : 0;
-    const baseWorkspaceWidth = shell.getBoundingClientRect().width - Number.parseFloat(openLeft) - Number.parseFloat(openRight);
+    const rightOffset = rightCollapsed ? rightWidthValue - 44 : 0;
+    const baseWorkspaceWidth = shell.getBoundingClientRect().width - Number.parseFloat(openLeft) - rightWidthValue;
     shell.style.gridTemplateColumns = openLeft + ' minmax(0, 1fr) ' + right;
     workspace.style.left = '';
     workspace.style.width = rightOffset ? baseWorkspaceWidth + rightOffset + 'px' : '';
+    shell.classList.toggle('right-narrow', !rightCollapsed && rightWidthValue <= 72);
   }
 
   function setRightCollapsed(collapsed) {
     if (!shell) return;
+    if (!collapsed) {
+      const rootStyle = getComputedStyle(document.documentElement);
+      const defaultRight = Number.parseFloat(rootStyle.getPropertyValue('--right-default-w')) || 196;
+      const leftMaxWidth = Number.parseFloat(rootStyle.getPropertyValue('--left-max-w')) || 300;
+      document.documentElement.style.setProperty('--right-w', Math.min(defaultRight, leftMaxWidth) + 'px');
+    }
     shell.classList.toggle('right-collapsed', collapsed);
     if (collapseRight) collapseRight.setAttribute('aria-expanded', String(!collapsed));
     if (expandRight) expandRight.setAttribute('aria-expanded', String(!collapsed));

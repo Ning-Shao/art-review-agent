@@ -1,4 +1,5 @@
 import { defaultMockCase, findBestMockCase } from './mockCases.js';
+import { ruralRevitalizationDirections } from './competitionRequirements.js';
 import { clampScore, getScoreLevel, getTotalScore, reviewRubrics } from './reviewRubrics.js';
 
 function getCaseAwareValue(value, mockCase, caseValue, defaultValues) {
@@ -104,6 +105,20 @@ function buildFeedback(mockCase, level) {
   };
 }
 
+function getSelectedRuralDirection(work) {
+  const source = [work.breadcrumb, work.description, work.theme].filter(Boolean).join('\n');
+  return ruralRevitalizationDirections.find((direction) => source.includes(direction.label));
+}
+
+function getDirectionAdvice(direction) {
+  if (!direction) return '';
+  if (direction.id === 'short-video') {
+    return '当前选择“土特产短视频创作”，需重点核对叙事方向、视频节奏、乡土文化表达和 3 分钟以内的时长控制。';
+  }
+  const keyRequirements = (direction.requirements || []).slice(0, 2).join('；');
+  return '当前选择“' + direction.label + '”，需重点核对：' + keyRequirements;
+}
+
 export function buildMockReport(workInput) {
   const mockCase = findBestMockCase(workInput);
   const work = normalizeWork(workInput, mockCase);
@@ -111,6 +126,12 @@ export function buildMockReport(workInput) {
   const totalScore = getTotalScore(scoreProfile);
   const level = getScoreLevel(totalScore);
   const feedback = buildFeedback(mockCase, level);
+  const selectedDirection = getSelectedRuralDirection(work);
+  const directionAdvice = getDirectionAdvice(selectedDirection);
+  if (directionAdvice) {
+    feedback.suggestions = [...feedback.suggestions, directionAdvice];
+    feedback.checklist = [...feedback.checklist, '是否逐条对照“' + selectedDirection.label + '”的设计要求和通用作品规格要求。'];
+  }
 
   return {
     id: 'report-' + Date.now(),
@@ -123,7 +144,7 @@ export function buildMockReport(workInput) {
     scoreProfile,
     overview: {
       workType: mockCase.workType,
-      themeDirection: work.theme,
+      themeDirection: selectedDirection ? selectedDirection.label : work.theme,
       competitionCategory: mockCase.competitionFit,
       completion: mockCase.completion,
     },
@@ -145,7 +166,8 @@ export function buildMockReport(workInput) {
       mockCase.competitionFit +
       ' 当前选择节点为“' +
       work.breadcrumb +
-      '”，提交材料中应主动说明作品与该类别评价标准之间的关系。',
+      '”，提交材料中应主动说明作品与该类别评价标准之间的关系。' +
+      (directionAdvice ? ' ' + directionAdvice : ''),
     summary: feedback.closing,
   };
 }

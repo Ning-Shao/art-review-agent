@@ -25,7 +25,7 @@ export function createApp(root) {
   bindSettingsModal();
   bindWorkForm(store, {
     onReportGenerated(report) {
-      const record = createHistoryRecord(report);
+      const record = createHistoryRecord(report, store.uploads);
       updateReportPanel(report);
       store.history = addHistoryRecord(store.history, record);
       persistHistory(store.history);

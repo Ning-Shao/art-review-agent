@@ -10,6 +10,8 @@ export const DOM_IDS = {
   previewTitle: 'previewTitle',
   previewBody: 'previewBody',
   previewClose: 'previewClose',
+  collapseLeft: 'collapseLeft',
+  expandLeft: 'expandLeft',
   collapseRight: 'collapseRight',
   expandRight: 'expandRight',
   historyMenu: 'historyMenu',

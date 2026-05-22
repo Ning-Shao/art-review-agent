@@ -10,12 +10,15 @@ export function persistHistory(records) {
   writeJSON(HISTORY_KEY, records.slice(0, 12));
 }
 
-export function createHistoryRecord(report) {
+export function createHistoryRecord(report, uploads = []) {
   const time = new Date(report.generatedAt);
+  const coverUpload = uploads.find((item) => item.role === 'cover' && item.previewUrl) || uploads.find((item) => item.previewUrl);
   return {
     id: report.id,
     title: report.work.title,
     meta: report.work.category + ' / ' + report.work.track,
+    coverUrl: coverUpload ? coverUpload.previewUrl : '',
+    coverAlt: coverUpload ? coverUpload.name : report.work.title,
     timeLabel: Number.isNaN(time.getTime())
       ? '刚刚'
       : time.toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }),

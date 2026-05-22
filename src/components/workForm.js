@@ -1,10 +1,10 @@
 import { generateMockReview } from '../services/aiReviewService.mock.js';
 
-let requirementFiles = [];
+let descriptionFiles = [];
 
 export function renderWorkForm() {
 
-  return "<div class=\"panel work-form-panel\">\n            <h2 class=\"panel-title\">作品信息</h2>\n            <p class=\"panel-copy\">根据左侧项目类型填写作品信息。</p>\n            <div class=\"field-grid\" id=\"workFieldGrid\"></div>\n          </div>";
+  return "<div class=\"panel work-form-panel\">\n            <h2 class=\"panel-title\">作品说明</h2>\n            <div class=\"field-grid\" id=\"workFieldGrid\"></div>\n          </div>";
 
 }
 
@@ -15,87 +15,102 @@ function temporarilyLabel(button, label) {
 }
 
 function renderFieldGrid(projectType) {
-  const shouldShowRequirement = projectType === 'custom' || projectType === 'personal';
   return '<div class="field full">' +
-      '<label for="title">作品名称</label>' +
-      '<input id="title" value="土特产宣传海报设计">' +
-    '</div>' +
-    '<div class="field full">' +
-      '<label for="desc">作品说明</label>' +
-      '<textarea id="desc">围绕地方土特产的品牌传播与视觉表达，完成一组面向公益赛道提交的设计方案。</textarea>' +
-    '</div>' +
-    (shouldShowRequirement
-      ? '<div class="field full">' +
-          '<label for="requirement">作品要求</label>' +
-          '<textarea id="requirement">请填写课程、毕业设计或实践项目对主题、格式、成果数量、提交规范等方面的具体要求。</textarea>' +
-          '<div class="requirement-upload">' +
-            '<button class="requirement-upload-button" id="requirementFileButton" type="button">上传要求文档</button>' +
-            '<span>支持任务书、课程要求、竞赛补充说明等材料</span>' +
-            '<input id="requirementFileInput" type="file" multiple hidden>' +
-          '</div>' +
-          '<ul class="requirement-file-list" id="requirementFileList" aria-live="polite"></ul>' +
-        '</div>'
-      : '');
+      '<label class="sr-only" for="desc">作品说明</label>' +
+      '<textarea id="desc" placeholder="输入或粘贴作品说明、创作背景、设计目标、过程摘要等。"></textarea>' +
+      '<div class="requirement-upload">' +
+        '<button class="requirement-upload-button" id="descriptionFileButton" type="button">上传说明文档</button>' +
+        '<span>支持 Word / PDF / TXT</span>' +
+        '<input id="descriptionFileInput" type="file" accept=".doc,.docx,.pdf,.txt,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,text/plain" multiple hidden>' +
+      '</div>' +
+      '<ul class="requirement-file-list" id="descriptionFileList" aria-live="polite"></ul>' +
+    '</div>';
 }
 
 function getContextText(store) {
   return store.selectedBreadcrumb || '';
 }
 
+function getUploadContextText(uploads) {
+  const roleLabels = {
+    cover: '作品封面 / 主展示图',
+    gallery: '作品图集 / 辅助展示图',
+  };
+  if (!uploads.length) return '';
+  return '作品文件标签：' + uploads.map((item, index) => {
+    const label = roleLabels[item.role] || (index === 0 ? '默认历史封面' : '未标记');
+    return item.name + '（' + label + '）';
+  }).join('；');
+}
+
 function getWorkFormValues(store) {
   const contextText = getContextText(store);
-  const title = document.getElementById('title')?.value.trim();
   const description = document.getElementById('desc')?.value.trim();
-  const requirement = document.getElementById('requirement')?.value.trim();
-  const requirementFileText = requirementFiles.length ? '要求文档：' + requirementFiles.map((file) => file.name).join('、') : '';
+  const projectName = document.getElementById('projectName')?.value.trim();
+  const moreCompetitionName = document.getElementById('moreCompetitionName')?.value.trim();
+  const moreCompetitionTheme = document.getElementById('moreCompetitionTheme')?.value.trim();
+  const moreCompetitionCategory = document.getElementById('moreCompetitionCategory')?.value.trim();
+  const competitionRequirement = document.getElementById('competitionRequirement')?.value.trim();
+  const assignmentRequirement = document.getElementById('assignmentRequirement')?.value.trim();
+  const reviewContext = document.getElementById('reviewContext')?.value.trim();
+  const descriptionFileText = descriptionFiles.length ? '说明文档：' + descriptionFiles.map((file) => file.name).join('、') : '';
+  const uploadContextText = getUploadContextText(store.uploads || []);
+  const contextBlocks = [
+    description,
+    descriptionFileText,
+    uploadContextText,
+    store.selectedRequirementContext ? '当前设计方向赛事要求：' + store.selectedRequirementContext : '',
+    moreCompetitionName ? '赛事名称：' + moreCompetitionName : '',
+    moreCompetitionTheme ? '赛事主题：' + moreCompetitionTheme : '',
+    moreCompetitionCategory ? '参赛类别：' + moreCompetitionCategory : '',
+    competitionRequirement ? '赛事要求：' + competitionRequirement : '',
+    projectName ? '项目名称：' + projectName : '',
+    assignmentRequirement ? '项目要求：' + assignmentRequirement : '',
+    store.selectedProjectTag ? '项目类型标签：' + store.selectedProjectTag : '',
+    reviewContext ? '评审上下文：' + reviewContext : '',
+  ];
   return {
-    title,
+    title: projectName || moreCompetitionName || '未命名作品',
     mode: store.selectedProjectType === 'custom' || store.selectedProjectType === 'personal' ? '自定义项目预评审' : '竞赛项目预评审',
     category: contextText.split(' / ')[0] || '竞赛项目',
     track: contextText.split(' / ').slice(1).join(' / ') || contextText,
-    theme: '',
-    description: [description, requirement ? '作品要求：' + requirement : '', requirementFileText].filter(Boolean).join('\n'),
+    theme: moreCompetitionTheme || store.selectedProjectTag || '',
+    description: contextBlocks.filter(Boolean).join('\n'),
     breadcrumb: contextText,
     mediaNode: contextText,
   };
 }
 
-function renderRequirementFiles() {
-  const list = document.getElementById('requirementFileList');
+function renderDescriptionFiles() {
+  const list = document.getElementById('descriptionFileList');
   if (!list) return;
-  list.innerHTML = requirementFiles.length
-    ? requirementFiles.map((file) => '<li>' + file.name + '</li>').join('')
-    : '<li class="empty">尚未上传要求文档</li>';
+  list.innerHTML = descriptionFiles.length
+    ? descriptionFiles.map((file) => '<li>' + file.name + '</li>').join('')
+    : '<li class="empty">尚未上传说明文档</li>';
 }
 
-function bindRequirementUpload() {
-  const input = document.getElementById('requirementFileInput');
-  const button = document.getElementById('requirementFileButton');
+function bindDescriptionUpload() {
+  const input = document.getElementById('descriptionFileInput');
+  const button = document.getElementById('descriptionFileButton');
   if (!input || !button) return;
   button.addEventListener('click', () => input.click());
   input.addEventListener('change', () => {
-    requirementFiles = Array.from(input.files || []).map((file) => ({ name: file.name }));
-    renderRequirementFiles();
+    descriptionFiles = Array.from(input.files || []).map((file) => ({ name: file.name }));
+    renderDescriptionFiles();
     input.value = '';
   });
-  renderRequirementFiles();
+  renderDescriptionFiles();
 }
 
 function updateWorkFields(projectType) {
   const fieldGrid = document.getElementById('workFieldGrid');
   if (!fieldGrid) return;
   const currentValues = {
-    title: document.getElementById('title')?.value,
     desc: document.getElementById('desc')?.value,
-    requirement: document.getElementById('requirement')?.value,
   };
   fieldGrid.innerHTML = renderFieldGrid(projectType);
-  if (currentValues.title) document.getElementById('title').value = currentValues.title;
   if (currentValues.desc) document.getElementById('desc').value = currentValues.desc;
-  if ((projectType === 'custom' || projectType === 'personal') && currentValues.requirement) {
-    document.getElementById('requirement').value = currentValues.requirement;
-  }
-  bindRequirementUpload();
+  bindDescriptionUpload();
 }
 
 export function bindWorkForm(store, handlers = {}) {

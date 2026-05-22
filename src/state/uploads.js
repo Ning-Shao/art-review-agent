@@ -13,6 +13,7 @@ export function addUploadFiles(currentFiles, fileSet) {
     name: file.name,
     type: file.type,
     previewUrl: file.type.startsWith('image/') ? URL.createObjectURL(file) : '',
+    role: '',
   }));
   return [...currentFiles, ...nextFiles];
 }
@@ -33,4 +34,20 @@ export function reorderUploadFiles(currentFiles, sourceId, targetId) {
   const movingItems = nextFiles.splice(sourceIndex, 1);
   nextFiles.splice(targetIndex, 0, movingItems[0]);
   return nextFiles;
+}
+
+export function renameUploadFile(currentFiles, id, name) {
+  const nextName = name.trim();
+  if (!nextName) return currentFiles;
+  return currentFiles.map((item) => (
+    item.id === id ? { ...item, name: nextName } : item
+  ));
+}
+
+export function setUploadFileRole(currentFiles, id, role) {
+  return currentFiles.map((item) => {
+    if (role === 'cover' && item.id !== id) return { ...item, role: item.role === 'cover' ? '' : item.role };
+    if (item.id === id) return { ...item, role };
+    return item;
+  });
 }

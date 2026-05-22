@@ -1,7 +1,7 @@
 @media (max-width: 1160px) {
       :root {
-        --left-w: 246px;
-        --right-w: 220px;
+        --right-w: 180px;
+        --right-default-w: 180px;
       }
 
       .topbar {
@@ -50,20 +50,38 @@
       .right-rail {
         position: relative;
         top: auto;
+        width: auto;
+        min-width: 0;
+        max-width: none;
         height: auto;
+        overflow: visible;
         border: 0;
         border-bottom: 1px solid var(--line);
       }
 
-      .shell.right-collapsed .right-rail {
+      #collapseLeft {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        left: auto;
+      }
+
+      .shell.right-collapsed .right-rail,
+      .shell.right-narrow .right-rail {
         padding: 12px 18px;
       }
 
-      .shell.right-collapsed .right-block {
+      .shell.right-collapsed .right-block,
+      .shell.right-narrow .right-block {
         display: block;
       }
 
-      .shell.right-collapsed .collapsed-tools {
+      .shell.right-collapsed .collapsed-tools,
+      .shell.right-narrow .collapsed-tools {
+        display: none;
+      }
+
+      .left-collapsed-tools {
         display: none;
       }
 
