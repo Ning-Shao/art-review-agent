@@ -1,5 +1,5 @@
 import { DOM_IDS } from '../ids.js';
-import { getExtension } from '../state/uploads.js';
+import { getFileTypeLabel } from '../state/uploads.js';
 
 export function renderPreviewModal() {
 
@@ -27,7 +27,7 @@ export function bindPreviewModal() {
     } else {
       const doc = document.createElement('div');
       doc.className = 'doc-preview-large';
-      doc.textContent = getExtension(item.name);
+      doc.textContent = getFileTypeLabel(item);
       previewBody.appendChild(doc);
     }
     previewModal.hidden = false;

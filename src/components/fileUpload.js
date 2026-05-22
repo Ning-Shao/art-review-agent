@@ -1,7 +1,7 @@
 import { DOM_IDS } from '../ids.js';
 import {
   addUploadFiles,
-  getExtension,
+  getFileTypeLabel,
   removeUploadFile,
   renameUploadFile,
   reorderUploadFiles,
@@ -16,7 +16,7 @@ const FILE_ROLE_OPTIONS = [
 
 export function renderFileUpload() {
 
-  return "<div class=\"panel upload-panel\">\n            <div>\n              <h2 class=\"panel-title\">作品文件</h2>\n              <p class=\"panel-copy\">上传作品图片，支持多张图、拖拽排序和双击预览大图。</p>\n            </div>\n            <div class=\"upload-drop\" id=\"uploadDrop\" role=\"button\" tabindex=\"0\" aria-label=\"上传作品图片\">\n              <div>\n                <strong>+</strong>\n                上传作品图片\n              </div>\n            </div>\n            <input id=\"fileInput\" type=\"file\" accept=\"image/*\" multiple hidden>\n            <p class=\"upload-meta\" id=\"uploadMeta\">已上传（双击缩略图放大）（拖拽调整排序）</p>\n            <ul class=\"file-list\" id=\"fileList\" aria-live=\"polite\"></ul>\n          </div>";
+  return "<div class=\"panel upload-panel\">\n            <div>\n              <h2 class=\"panel-title\">作品文件</h2>\n              <p class=\"panel-copy\">上传作品图片、视频或说明文档。</p>\n            </div>\n            <div class=\"upload-drop\" id=\"uploadDrop\" role=\"button\" tabindex=\"0\" aria-label=\"上传作品文件\">\n              <div>\n                <strong>+</strong>\n                上传作品文件\n              </div>\n            </div>\n            <input id=\"fileInput\" type=\"file\" multiple hidden>\n            <p class=\"upload-meta\" id=\"uploadMeta\">已上传（图片可双击预览，非图片显示文件类型）（拖拽调整排序）</p>\n            <ul class=\"file-list\" id=\"fileList\" aria-live=\"polite\"></ul>\n          </div>";
 
 }
 
@@ -32,7 +32,7 @@ export function bindFileUpload(store, previewController) {
   function renderFiles() {
     if (!fileList || !uploadMeta) return;
     fileList.innerHTML = '';
-    uploadMeta.textContent = store.uploads.length ? '已上传（双击缩略图放大）（拖拽调整排序）' : '尚未上传文件';
+    uploadMeta.textContent = store.uploads.length ? '已上传（图片可双击预览，非图片显示文件类型）（拖拽调整排序）' : '尚未上传文件';
     store.uploads.forEach((item) => {
       const li = document.createElement('li');
       li.className = 'file-item';
@@ -50,7 +50,7 @@ export function bindFileUpload(store, previewController) {
       } else {
         const docThumb = document.createElement('span');
         docThumb.className = 'doc-thumb';
-        docThumb.textContent = getExtension(item.name);
+        docThumb.textContent = getFileTypeLabel(item);
         previewButton.appendChild(docThumb);
       }
       const name = document.createElement('button');
@@ -136,12 +136,7 @@ export function bindFileUpload(store, previewController) {
 
   function addFiles(fileSet) {
     if (!fileSet || !fileSet.length) return;
-    const imageFiles = Array.from(fileSet).filter((file) => file.type.startsWith('image/'));
-    if (!imageFiles.length) {
-      if (uploadMeta) uploadMeta.textContent = '请上传图片文件';
-      return;
-    }
-    store.uploads = addUploadFiles(store.uploads, imageFiles);
+    store.uploads = addUploadFiles(store.uploads, fileSet);
     if (fileInput) fileInput.value = '';
     renderFiles();
   }

@@ -59,11 +59,19 @@
         border-bottom: 1px solid var(--line);
       }
 
-      #collapseLeft {
-        position: absolute;
-        top: 18px;
-        right: 18px;
-        left: auto;
+      #collapseLeft,
+      #expandLeft,
+      #collapseRight,
+      #expandRight {
+        display: none;
+      }
+
+      .shell.left-narrow .left-rail {
+        padding: 18px;
+      }
+
+      .shell.left-narrow .context-accordion {
+        display: grid;
       }
 
       .shell.right-collapsed .right-rail,

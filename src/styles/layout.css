@@ -419,9 +419,10 @@
     }
 
     #collapseLeft {
-      position: fixed;
-      top: calc(var(--top-h) + 18px);
-      left: calc(var(--left-w) - 38px);
+      position: absolute;
+      top: 28px;
+      right: 18px;
+      left: auto;
       z-index: 5;
     }
 

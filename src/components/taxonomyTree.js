@@ -120,6 +120,11 @@ export function bindTaxonomyTree(store) {
   const expandLeft = document.getElementById(DOM_IDS.expandLeft);
   store.selectedRequirementId = ruralRevitalizationTrack.directions[0].id;
   store.selectedRequirementContext = formatRuralRevitalizationContext(store.selectedRequirementId);
+  const mobileRailQuery = window.matchMedia('(max-width: 860px)');
+
+  function isMobileRailLocked() {
+    return mobileRailQuery.matches;
+  }
 
   function updateShellColumns() {
     if (!shell || !workspace) return;
@@ -137,6 +142,7 @@ export function bindTaxonomyTree(store) {
   }
 
   function setLeftCollapsed(collapsed) {
+    if (isMobileRailLocked()) return;
     const rootStyle = getComputedStyle(document.documentElement);
     const leftMaxWidth = Number.parseFloat(rootStyle.getPropertyValue('--left-max-w')) || 300;
     document.documentElement.style.setProperty('--left-w', (collapsed ? 44 : leftMaxWidth) + 'px');

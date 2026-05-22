@@ -55,6 +55,11 @@ export function bindRightRail(store) {
   const expandRight = document.getElementById(DOM_IDS.expandRight);
   const historyMenu = document.getElementById(DOM_IDS.historyMenu);
   let activeHistoryCard = null;
+  const mobileRailQuery = window.matchMedia('(max-width: 860px)');
+
+  function isMobileRailLocked() {
+    return mobileRailQuery.matches;
+  }
 
   function updateShellColumns() {
     if (!shell || !workspace) return;
@@ -74,6 +79,7 @@ export function bindRightRail(store) {
 
   function setRightCollapsed(collapsed) {
     if (!shell) return;
+    if (isMobileRailLocked()) return;
     if (!collapsed) {
       const rootStyle = getComputedStyle(document.documentElement);
       const defaultRight = Number.parseFloat(rootStyle.getPropertyValue('--right-default-w')) || 196;

@@ -7,6 +7,19 @@ export function getExtension(name) {
   return parts.length > 1 ? parts.pop().toUpperCase() : 'FILE';
 }
 
+export function getFileTypeLabel(file) {
+  const type = file.type || '';
+  if (type.startsWith('video/')) return 'VIDEO';
+  if (type.startsWith('audio/')) return 'AUDIO';
+  if (type === 'application/pdf') return 'PDF';
+  if (type.includes('word') || type.includes('officedocument.wordprocessingml')) return 'DOC';
+  if (type.includes('powerpoint') || type.includes('officedocument.presentationml')) return 'PPT';
+  if (type.includes('excel') || type.includes('spreadsheet')) return 'XLS';
+  if (type.startsWith('text/')) return 'TXT';
+  if (type.includes('zip') || type.includes('compressed')) return 'ZIP';
+  return getExtension(file.name);
+}
+
 export function addUploadFiles(currentFiles, fileSet) {
   const nextFiles = Array.from(fileSet).map((file) => ({
     id: Date.now() + '-' + Math.random().toString(16).slice(2),
