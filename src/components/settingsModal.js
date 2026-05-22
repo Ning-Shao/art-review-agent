@@ -15,8 +15,7 @@ export function renderSettingsModal() {
     "        <h2 class=\"sr-only\" id=\"settingsTitle\">米兰设计周 中国高校设计作品展 账号登录</h2>\n" +
     "        <div class=\"login-choice-list\" aria-label=\"米兰大赛账号操作\">\n" +
     "          <a class=\"login-choice primary\" href=\"https://milan-aap.org.cn/#/designer/login\" target=\"_blank\" rel=\"noopener noreferrer\"><span class=\"login-choice-icon\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span></span><span>米兰设计周 中国高校设计作品展 账号登录</span></a>\n" +
-    "          <p class=\"login-subtitle\">还没有大赛ID?</p>\n" +
-    "          <a class=\"login-register-link\" href=\"https://milan-aap.org.cn/#/designer/register\" target=\"_blank\" rel=\"noopener noreferrer\">点击注册 ↗</a>\n" +
+    "          <p class=\"login-subtitle\">还没有账号？<a class=\"login-register-link\" href=\"https://milan-aap.org.cn/#/designer/register\" target=\"_blank\" rel=\"noopener noreferrer\">点击注册 ↗</a></p>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
