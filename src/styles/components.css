@@ -268,7 +268,7 @@
 
     .cta:hover {
       transform: translateY(-1px);
-      box-shadow: 0 12px 22px rgba(29, 114, 216, 0.2);
+      box-shadow: 0 12px 22px rgba(124, 58, 237, 0.18);
       filter: brightness(1.02);
     }
 
@@ -428,7 +428,7 @@
     .file-name-input:focus,
     .file-role-select:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(29, 114, 216, 0.12);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
     }
 
     .delete-file {
@@ -569,7 +569,7 @@
 
     .report-action:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(29, 114, 216, 0.2);
+      box-shadow: 0 10px 18px rgba(124, 58, 237, 0.18);
       filter: brightness(1.03);
     }
 
@@ -1061,7 +1061,9 @@
       aspect-ratio: 4 / 3;
       border: 1px solid var(--line);
       border-radius: 6px;
-      background: linear-gradient(145deg, #202020 0 43%, #f1f1ef 43% 55%, #727272 55% 100%);
+      background:
+        linear-gradient(145deg, rgba(124, 58, 237, 0.88) 0 38%, rgba(255, 255, 255, 0.92) 38% 52%, rgba(58, 127, 240, 0.9) 52% 100%),
+        radial-gradient(circle at 76% 22%, rgba(255, 255, 255, 0.78) 0 10px, transparent 11px);
       overflow: hidden;
     }
 
@@ -1073,11 +1075,15 @@
     }
 
     .history-card:nth-child(2) .history-thumb {
-      background: linear-gradient(145deg, #efefef 0 34%, #202020 34% 57%, #9b9b9b 57% 100%);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0 32%, rgba(58, 127, 240, 0.88) 32% 58%, rgba(124, 58, 237, 0.86) 58% 100%),
+        radial-gradient(circle at 20% 76%, rgba(255, 255, 255, 0.72) 0 9px, transparent 10px);
     }
 
     .history-card:nth-child(3) .history-thumb {
-      background: linear-gradient(145deg, #656565 0 37%, #f7f7f7 37% 50%, #191919 50% 100%);
+      background:
+        linear-gradient(145deg, rgba(58, 127, 240, 0.84) 0 34%, rgba(238, 242, 255, 0.96) 34% 50%, rgba(124, 58, 237, 0.9) 50% 100%),
+        radial-gradient(circle at 78% 78%, rgba(255, 255, 255, 0.68) 0 8px, transparent 9px);
     }
 
     .history-info {
@@ -1452,18 +1458,18 @@
 
     .login-choice.primary {
       color: #fff;
-      background: linear-gradient(135deg, #2188ff, #005fd8);
-      box-shadow: 0 16px 34px rgba(22, 105, 220, 0.24);
+      background: linear-gradient(135deg, #3A7FF0, #7C3AED);
+      box-shadow: 0 16px 34px rgba(58, 127, 240, 0.24);
     }
 
     .login-choice.secondary {
-      border: 1px solid #1d72d8;
-      color: #1d72d8;
+      border: 1px solid #3A7FF0;
+      color: #3A7FF0;
       background: #edf5ff;
     }
 
     .login-register-link {
-      color: #0b7cff;
+      color: #3A7FF0;
       font-size: 21px;
       line-height: 1.45;
       font-weight: 900;
@@ -1473,11 +1479,11 @@
 
     .login-choice:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(29, 114, 216, 0.16);
+      box-shadow: 0 10px 18px rgba(58, 127, 240, 0.18);
     }
 
     .login-register-link:hover {
-      color: #005fd8;
+      color: #7C3AED;
       transform: translateY(-1px);
     }
 

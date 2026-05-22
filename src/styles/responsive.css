@@ -74,6 +74,48 @@
         display: grid;
       }
 
+      .login-dialog {
+        width: calc(100vw - 24px);
+        min-height: 0;
+        max-height: calc(100vh - 24px);
+        grid-template-columns: 1fr;
+        grid-template-rows: 50px 150px minmax(0, 1fr);
+      }
+
+      .login-visual {
+        grid-column: 1;
+        grid-row: 2;
+        border-radius: 0;
+      }
+
+      .login-body {
+        grid-column: 1;
+        grid-row: 3;
+        padding: 24px;
+      }
+
+      .login-choice {
+        min-height: 76px;
+        gap: 12px;
+        padding: 14px;
+        font-size: 16px;
+      }
+
+      .login-choice-icon {
+        width: 46px;
+        height: 46px;
+        padding: 10px;
+      }
+
+      .login-subtitle {
+        margin-top: 18px;
+        font-size: 16px;
+      }
+
+      .login-register-link {
+        font-size: 17px;
+      }
+
       .shell.right-collapsed .right-rail,
       .shell.right-narrow .right-rail {
         padding: 12px 18px;

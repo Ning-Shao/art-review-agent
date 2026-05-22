@@ -1,4 +1,5 @@
 import { ACTIONS, DOM_IDS } from '../ids.js';
+import { getRandomMonetThumbnail } from '../data/monetThumbnails.js';
 import { activateHistoryItem, deleteHistoryItem, persistHistory, renameHistoryItem } from '../state/history.js';
 import { renderHistoryPanel } from './historyPanel.js';
 
@@ -23,10 +24,11 @@ function createHistoryCard(record) {
     '<button class="more" type="button" aria-label="更多操作">...</button>';
   li.querySelector('strong').textContent = record.title;
   const thumb = li.querySelector('.history-thumb');
-  if (thumb && record.coverUrl) {
+  if (thumb) {
     const img = document.createElement('img');
-    img.src = record.coverUrl;
-    img.alt = record.coverAlt || record.title;
+    const fallbackThumbnail = getRandomMonetThumbnail();
+    img.src = record.coverUrl || fallbackThumbnail.url;
+    img.alt = record.coverUrl ? (record.coverAlt || record.title) : '';
     img.addEventListener('error', () => img.remove());
     thumb.appendChild(img);
   }
